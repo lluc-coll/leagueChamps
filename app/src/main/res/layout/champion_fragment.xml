@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fons">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="118dp"
+        android:layout_height="119dp"
+        android:src="@drawable/base"
+        tools:layout_editor_absoluteX="146dp"
+        tools:layout_editor_absoluteY="59dp" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lol_bold"
+        android:text="Aatrox"
+        android:textSize="24dp"
+        android:textColor="@color/grey"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="190dp" />
+
+    <TextView
+        android:id="@+id/tags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lol"
+        android:text="Fighter, Tank"
+        android:textColor="@color/grey"
+        android:textSize="20dp"
+        android:gravity="center"
+        tools:layout_editor_absoluteX="145dp"
+        tools:layout_editor_absoluteY="458dp" />
+
+    <TextView
+        android:id="@+id/lore"
+        android:layout_width="369dp"
+        android:layout_height="165dp"
+        android:layout_marginHorizontal="20dp"
+        android:fontFamily="@font/lol"
+        android:gravity="center"
+        android:text="Once honored defenders of Shurima against the Void, Aatrox and his brethren would eventually become an even greater threat to Runeterra, and were defeated only by cunning mortal sorcery. But after centuries of imprisonment, Aatrox was the first to find freedom once more, corrupting and transforming those foolish enough to try and wield the magical weapon that contained his essence. Now, with stolen flesh, he walks Runeterra in a brutal approximation of his previous form, seeking an apocalyptic and long overdue vengeance."
+        android:textColor="@color/grey"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="274dp" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lol"
+        android:text="the Darkin Blade"
+        android:textColor="@color/grey"
+        android:textSize="23dp"
+        tools:layout_editor_absoluteX="117dp"
+        tools:layout_editor_absoluteY="230dp" />
+
+    <ProgressBar
+        android:id="@+id/difficulty"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="234dp"
+        android:layout_height="6dp"
+        android:max="10"
+        android:progress="7"
+        android:progressTint="@color/purple_200"
+        android:progressBackgroundTint="@color/blue_black"
+        tools:layout_editor_absoluteX="145dp"
+        tools:layout_editor_absoluteY="666dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
