@@ -6,42 +6,94 @@
     android:layout_height="match_parent"
     android:background="@drawable/fons">
 
+    <ProgressBar
+        android:id="@+id/attack"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="234dp"
+        android:layout_height="6dp"
+        android:max="10"
+        android:progress="8"
+        android:progressBackgroundTint="@color/blue_black"
+        android:progressTint="@color/red"
+        app:layout_constraintBottom_toTopOf="@+id/defense"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.583"
+        app:layout_constraintStart_toEndOf="@+id/attackText"
+        app:layout_constraintTop_toBottomOf="@+id/tags" />
+
+    <ProgressBar
+        android:id="@+id/defense"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="234dp"
+        android:layout_height="6dp"
+        android:max="10"
+        android:progress="4"
+        android:progressBackgroundTint="@color/blue_black"
+        android:progressTint="@color/green"
+        app:layout_constraintBottom_toTopOf="@+id/magic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/defenceText"
+        app:layout_constraintTop_toBottomOf="@+id/attack" />
+
+    <ProgressBar
+        android:id="@+id/magic"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="234dp"
+        android:layout_height="6dp"
+        android:max="10"
+        android:progress="3"
+        android:progressBackgroundTint="@color/blue_black"
+        android:progressTint="@color/blue"
+        app:layout_constraintBottom_toTopOf="@+id/difficulty"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.593"
+        app:layout_constraintStart_toEndOf="@+id/magicText"
+        app:layout_constraintTop_toBottomOf="@+id/defense" />
+
     <ImageView
         android:id="@+id/icon"
         android:layout_width="118dp"
         android:layout_height="119dp"
+        android:layout_marginTop="56dp"
         android:src="@drawable/base"
-        tools:layout_editor_absoluteX="146dp"
-        tools:layout_editor_absoluteY="59dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/lol_bold"
         android:text="Aatrox"
-        android:textSize="24dp"
         android:textColor="@color/grey"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="190dp" />
+        android:textSize="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/icon" />
 
     <TextView
         android:id="@+id/tags"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="210dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/lol"
+        android:gravity="center"
         android:text="Fighter, Tank"
         android:textColor="@color/grey"
         android:textSize="20dp"
-        android:gravity="center"
-        tools:layout_editor_absoluteX="145dp"
-        tools:layout_editor_absoluteY="458dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lore" />
 
     <TextView
         android:id="@+id/lore"
         android:layout_width="369dp"
         android:layout_height="165dp"
         android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="7dp"
         android:fontFamily="@font/lol"
         android:gravity="center"
         android:text="Once honored defenders of Shurima against the Void, Aatrox and his brethren would eventually become an even greater threat to Runeterra, and were defeated only by cunning mortal sorcery. But after centuries of imprisonment, Aatrox was the first to find freedom once more, corrupting and transforming those foolish enough to try and wield the magical weapon that contained his essence. Now, with stolen flesh, he walks Runeterra in a brutal approximation of his previous form, seeking an apocalyptic and long overdue vengeance."
@@ -49,18 +101,20 @@
         android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="274dp" />
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
         android:fontFamily="@font/lol"
         android:text="the Darkin Blade"
         android:textColor="@color/grey"
         android:textSize="23dp"
-        tools:layout_editor_absoluteX="117dp"
-        tools:layout_editor_absoluteY="230dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name" />
 
     <ProgressBar
         android:id="@+id/difficulty"
@@ -68,11 +122,88 @@
         android:layout_width="234dp"
         android:layout_height="6dp"
         android:max="10"
-        android:progress="7"
-        android:progressTint="@color/purple_200"
+        android:progress="4"
         android:progressBackgroundTint="@color/blue_black"
-        tools:layout_editor_absoluteX="145dp"
-        tools:layout_editor_absoluteY="666dp" />
+        android:progressTint="@color/purple_200"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintStart_toEndOf="@+id/difficultyText"
+        app:layout_constraintTop_toBottomOf="@+id/magic" />
 
+    <TextView
+        android:id="@+id/attackText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:fontFamily="@font/lol"
+        android:gravity="center"
+        android:text="Attack"
+        android:textColor="@color/grey"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toTopOf="@+id/defenceText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tags" />
 
+    <TextView
+        android:id="@+id/defenceText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:fontFamily="@font/lol"
+        android:gravity="center"
+        android:text="Defence"
+        android:textColor="@color/grey"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toTopOf="@+id/magicText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/attackText" />
+
+    <TextView
+        android:id="@+id/magicText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:fontFamily="@font/lol"
+        android:gravity="center"
+        android:text="Magic"
+        android:textColor="@color/grey"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toTopOf="@+id/difficultyText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/defenceText" />
+
+    <TextView
+        android:id="@+id/difficultyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:fontFamily="@font/lol"
+        android:gravity="center"
+        android:text="Difficulty"
+        android:textColor="@color/grey"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/magicText" />
+
+    <ImageView
+        android:id="@+id/skins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/boto_skins"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/spells"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/boto_spells"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/skins" />
 </androidx.constraintlayout.widget.ConstraintLayout>

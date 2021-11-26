@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/listOfChampsFragment">
+
+    <fragment
+        android:id="@+id/listOfChampsFragment"
+        android:name="com.example.leaguechamps.ListOfChampsFragment"
+        android:label="list_of_champs_fragment"
+        tools:layout="@layout/list_of_champs_fragment" >
+        <action
+            android:id="@+id/action_listOfChampsFragment_to_championFragment"
+            app:destination="@id/championFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/championFragment"
+        android:name="com.example.leaguechamps.ChampionFragment"
+        android:label="ChampionFragment" />
+</navigation>
