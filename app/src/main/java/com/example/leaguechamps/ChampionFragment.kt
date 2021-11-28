@@ -1,5 +1,7 @@
 package com.example.leaguechamps
 
+import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -19,5 +21,26 @@ class ChampionFragment: Fragment(R.layout.champion_fragment) {
     lateinit var skinsButton: ImageView
     lateinit var spellsButton: ImageView
     private val viewModel: ChampViewModel by activityViewModels()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        champIcon = view.findViewById(R.id.icon)
+        champName = view.findViewById(R.id.name)
+        champTitle = view.findViewById(R.id.title)
+        champLore = view.findViewById(R.id.lore)
+        champTags = view.findViewById(R.id.tags)
+        attackBar = view.findViewById(R.id.attack)
+        defenceBar = view.findViewById(R.id.defense)
+        magicBar = view.findViewById(R.id.magic)
+        difficultyBar = view.findViewById(R.id.difficulty)
+        skinsButton = view.findViewById(R.id.skins)
+        spellsButton = view.findViewById(R.id.spells)
+
+        val position = arguments?.getInt("position")
+        val champ = viewModel.getOneList(position!!)
+
+        attackBar.progress = champ.attack
+    }
 
 }

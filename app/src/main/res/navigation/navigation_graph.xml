@@ -17,5 +17,8 @@
     <fragment
         android:id="@+id/championFragment"
         android:name="com.example.leaguechamps.ChampionFragment"
-        android:label="ChampionFragment" />
+        android:label="ChampionFragment" >
+        <argument android:name="position"
+            app:argType="integer" />
+    </fragment>
 </navigation>

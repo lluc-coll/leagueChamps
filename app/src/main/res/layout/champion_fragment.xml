@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".ChampionFragment"
     android:background="@drawable/fons">
 
     <ProgressBar
@@ -46,7 +47,7 @@
         android:progressTint="@color/blue"
         app:layout_constraintBottom_toTopOf="@+id/difficulty"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.593"
+        app:layout_constraintHorizontal_bias="0.607"
         app:layout_constraintStart_toEndOf="@+id/magicText"
         app:layout_constraintTop_toBottomOf="@+id/defense" />
 
@@ -127,7 +128,7 @@
         android:progressTint="@color/purple_200"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintHorizontal_bias="0.302"
         app:layout_constraintStart_toEndOf="@+id/difficultyText"
         app:layout_constraintTop_toBottomOf="@+id/magic" />
 
@@ -136,7 +137,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:fontFamily="@font/lol"
+        android:fontFamily="@font/lol_bold"
         android:gravity="center"
         android:text="Attack"
         android:textColor="@color/grey"
@@ -150,7 +151,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:fontFamily="@font/lol"
+        android:fontFamily="@font/lol_bold"
         android:gravity="center"
         android:text="Defence"
         android:textColor="@color/grey"
@@ -164,7 +165,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:fontFamily="@font/lol"
+        android:fontFamily="@font/lol_bold"
         android:gravity="center"
         android:text="Magic"
         android:textColor="@color/grey"
@@ -178,7 +179,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:fontFamily="@font/lol"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="@font/lol_bold"
         android:gravity="center"
         android:text="Difficulty"
         android:textColor="@color/grey"

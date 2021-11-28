@@ -5,7 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class ListOfChampsFragment : Fragment(R.layout.list_of_champs_fragment), ListOfChampsAdapter.OnItemClickListener{
@@ -16,14 +16,13 @@ class ListOfChampsFragment : Fragment(R.layout.list_of_champs_fragment), ListOfC
         super.onViewCreated(view, savedInstanceState)
 
         recyclerView = view.findViewById(R.id.recycler_view)
-        recyclerView.layoutManager = LinearLayoutManager(view.context)
-        val adapter = ListOfChampsAdapter(viewModel.getLists(),this)
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 4)
+        val adapter = ListOfChampsAdapter(viewModel.getLists(), this)
         recyclerView.adapter = adapter
     }
 
     override fun onItemClick(position: Int) {
-        val clickedItem = viewModel.getOneList(position)
-        val action = ListOfChampsFragment.(position)
+        val action = ListOfChampsFragmentDirections.actionListOfChampsFragmentToChampionFragment(position)
         findNavController().navigate(action)
     }
 }

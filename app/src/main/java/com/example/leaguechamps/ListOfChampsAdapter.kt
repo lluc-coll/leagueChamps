@@ -8,7 +8,7 @@ import android.widget.TextView
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 
-class ListOfChampsAdapter(private val champs: kotlin.collections.List<Champion>, private val listener: AdapterView.OnItemClickListener) : RecyclerView.Adapter<ListOfChampsAdapter.ListOfChampsViewHolder>() {
+class ListOfChampsAdapter(private val champs: List<Champion>, private val listener: OnItemClickListener) : RecyclerView.Adapter<ListOfChampsAdapter.ListOfChampsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListOfChampsViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_champ,parent,false)
