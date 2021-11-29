@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fons">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="299dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/lol_bold"
+        android:gravity="center"
+        android:text="Aatrox Spells"
+        android:textColor="@color/gold"
+        android:textSize="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/passive"
+        android:layout_width="59dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="22dp"
+        android:src="@drawable/base"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passiveName" />
+
+    <TextView
+        android:id="@+id/P"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:fontFamily="@font/lol_bold"
+        android:gravity="center"
+        android:text="P"
+        android:textColor="@color/gold"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="@+id/passive"
+        app:layout_constraintTop_toTopOf="@+id/passive" />
+
+    <TextView
+        android:id="@+id/passiveName"
+        android:layout_width="210dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/lol_bold"
+        android:gravity="center"
+        android:text="Deathbringer Stance"
+        android:textColor="@color/grey"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.547"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+
+    <TextView
+        android:id="@+id/passiveDesc"
+        android:layout_width="277dp"
+        android:layout_height="64dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/lol"
+        android:gravity="center_horizontal"
+        android:text="Periodically, Aatrox's next basic attack deals bonus physical damage and heals him, based on the target's max health."
+        android:textColor="@color/grey"
+        android:textSize="14dp"
+        android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toEndOf="@+id/passive"
+        app:layout_constraintTop_toBottomOf="@+id/passiveName" />
+
+
+    <ImageView
+        android:id="@+id/qSpell"
+        android:layout_width="67dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="22dp"
+        android:src="@drawable/base"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/qSpellName" />
+
+    <TextView
+        android:id="@+id/Q"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:fontFamily="@font/lol_bold"
+        android:gravity="center"
+        android:text="Q"
+        android:textColor="@color/gold"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="@+id/qSpell"
+        app:layout_constraintTop_toTopOf="@+id/qSpell" />
+
+    <TextView
+        android:id="@+id/qSpellName"
+        android:layout_width="210dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="22dp"
+        android:fontFamily="@font/lol_bold"
+        android:gravity="center"
+        android:text="The Darkin Blade"
+        android:textColor="@color/grey"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.547"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passiveDesc" />
+
+    <TextView
+        android:id="@+id/qSpellDesc"
+        android:layout_width="277dp"
+        android:layout_height="64dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/lol"
+        android:gravity="center_horizontal"
+        android:text="Aatrox slams his greatsword down, dealing physical damage. He can swing three times, each with a different area of effect."
+        android:textColor="@color/grey"
+        android:textSize="14dp"
+        android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/qSpell"
+        app:layout_constraintTop_toBottomOf="@+id/qSpellName" />
+
+
+    <ImageView
+        android:id="@+id/wSpell"
+        android:layout_width="67dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="22dp"
+        android:src="@drawable/base"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wSpellName" />
+
+    <TextView
+        android:id="@+id/W"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:fontFamily="@font/lol_bold"
+        android:gravity="center"
+        android:text="W"
+        android:textColor="@color/gold"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="@+id/wSpell"
+        app:layout_constraintTop_toTopOf="@+id/wSpell" />
+
+    <TextView
+        android:id="@+id/wSpellName"
+        android:layout_width="210dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="22dp"
+        android:fontFamily="@font/lol_bold"
+        android:gravity="center"
+        android:text="Infernal Chains"
+        android:textColor="@color/grey"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.547"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/qSpellDesc" />
+
+    <TextView
+        android:id="@+id/wSpellDesc"
+        android:layout_width="277dp"
+        android:layout_height="64dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/lol"
+        android:gravity="center_horizontal"
+        android:text="Aatrox smashes the ground, dealing damage to the first enemy hit. Champions and large monsters have to leave the impact area quickly or they will be dragged to the center and take the damage again."
+        android:textColor="@color/grey"
+        android:textSize="14dp"
+        android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/wSpell"
+        app:layout_constraintTop_toBottomOf="@+id/wSpellName" />
+
+
+    <ImageView
+        android:id="@+id/eSpell"
+        android:layout_width="67dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="22dp"
+        android:src="@drawable/base"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eSpellName" />
+
+    <TextView
+        android:id="@+id/E"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:fontFamily="@font/lol_bold"
+        android:gravity="center"
+        android:text="E"
+        android:textColor="@color/gold"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="@+id/eSpell"
+        app:layout_constraintTop_toTopOf="@+id/eSpell" />
+
+    <TextView
+        android:id="@+id/eSpellName"
+        android:layout_width="210dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="22dp"
+        android:fontFamily="@font/lol_bold"
+        android:gravity="center"
+        android:text="Umbral Dash"
+        android:textColor="@color/grey"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.547"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wSpellDesc" />
+
+    <TextView
+        android:id="@+id/eSpellDesc"
+        android:layout_width="277dp"
+        android:layout_height="64dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/lol"
+        android:gravity="center_horizontal"
+        android:text="Passively, Aatrox heals when damaging enemy champions. On activation, he dashes in a direction."
+        android:textColor="@color/grey"
+        android:textSize="14dp"
+        android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/eSpell"
+        app:layout_constraintTop_toBottomOf="@+id/eSpellName" />
+
+
+    <ImageView
+        android:id="@+id/rSpell"
+        android:layout_width="67dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="22dp"
+        android:src="@drawable/base"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rSpellName" />
+
+    <TextView
+        android:id="@+id/R"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:fontFamily="@font/lol_bold"
+        android:gravity="center"
+        android:text="R"
+        android:textColor="@color/gold"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="@+id/rSpell"
+        app:layout_constraintTop_toTopOf="@+id/rSpell" />
+
+    <TextView
+        android:id="@+id/rSpellName"
+        android:layout_width="210dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="22dp"
+        android:fontFamily="@font/lol_bold"
+        android:gravity="center"
+        android:text="World Ender"
+        android:textColor="@color/grey"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.547"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eSpellDesc" />
+
+    <TextView
+        android:id="@+id/rSpellDesc"
+        android:layout_width="277dp"
+        android:layout_height="64dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/lol"
+        android:gravity="center_horizontal"
+        android:text="Aatrox unleashes his demonic form, fearing nearby enemy minions and gaining attack damage, increased healing, and movement speed. If he gets a takedown, this effect is extended."
+        android:textColor="@color/grey"
+        android:textSize="14dp"
+        android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/rSpell"
+        app:layout_constraintTop_toBottomOf="@+id/rSpellName" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

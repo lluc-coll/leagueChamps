@@ -20,5 +20,12 @@
         android:label="ChampionFragment" >
         <argument android:name="position"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_championFragment_to_spellsFragment"
+            app:destination="@id/spellsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/spellsFragment"
+        android:name="com.example.leaguechamps.SpellsFragment"
+        android:label="SpellsFragment" />
 </navigation>

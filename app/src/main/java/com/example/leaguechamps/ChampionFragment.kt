@@ -7,6 +7,9 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import android.text.method.ScrollingMovementMethod
+import androidx.navigation.fragment.findNavController
+
 
 class ChampionFragment: Fragment(R.layout.champion_fragment) {
     lateinit var champIcon: ImageView
@@ -40,7 +43,26 @@ class ChampionFragment: Fragment(R.layout.champion_fragment) {
         val position = arguments?.getInt("position")
         val champ = viewModel.getOneList(position!!)
 
+        champLore.movementMethod = ScrollingMovementMethod()
+
+        champIcon.setImageResource(champ.iconUrl)
+        champName.text = champ.name
+        champTitle.text = champ.title
+        champLore.text = champ.lore
+        val separator = ", "
+        val tags = champ.tags.joinToString(separator)
+        champTags.text = tags
         attackBar.progress = champ.attack
+        defenceBar.progress = champ.defence
+        magicBar.progress = champ.magic
+        difficultyBar.progress = champ.difficulty
+
+
+        spellsButton.setOnClickListener{
+            //val spells = Spells(1, "d", "d", 1, "d", "d", 1, "d", "d", 1, "d", "d", 1, "d", "d")
+            val action = ChampionFragmentDirections.actionChampionFragmentToSpellsFragment()
+            findNavController().navigate(action)
+        }
     }
 
 }
