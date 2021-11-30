@@ -7,6 +7,30 @@
     tools:context=".ChampionFragment"
     android:background="@drawable/fons">
 
+    <ImageButton
+        android:id="@+id/goBack"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/goback"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/favIcon"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:scaleX="1.4"
+        android:scaleY="1.4"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/fav_false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goBack" />
+
     <ProgressBar
         android:id="@+id/attack"
         style="@android:style/Widget.ProgressBar.Horizontal"
@@ -118,6 +142,62 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name" />
 
+    <TextView
+        android:id="@+id/attackValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:fontFamily="@font/lol"
+        android:gravity="center"
+        android:text="4/10"
+        android:textColor="@color/gold"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/attack"
+        app:layout_constraintEnd_toEndOf="@+id/attack" />
+
+    <TextView
+        android:id="@+id/defenceValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:fontFamily="@font/lol"
+        android:gravity="center"
+        android:text="4/10"
+        android:textColor="@color/gold"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/defense"
+        app:layout_constraintEnd_toEndOf="@+id/defense" />
+
+    <TextView
+        android:id="@+id/magicValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:fontFamily="@font/lol"
+        android:gravity="center"
+        android:text="4/10"
+        android:textColor="@color/gold"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/magic"
+        app:layout_constraintEnd_toEndOf="@+id/magic" />
+
+    <TextView
+        android:id="@+id/difficultyValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:fontFamily="@font/lol"
+        android:gravity="center"
+        android:text="4/10"
+        android:textColor="@color/gold"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/difficulty"
+        app:layout_constraintEnd_toEndOf="@+id/difficulty" />
+
     <ProgressBar
         android:id="@+id/difficulty"
         style="@android:style/Widget.ProgressBar.Horizontal"
@@ -190,23 +270,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/magicText" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/skins"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
         android:layout_marginEnd="16dp"
         android:src="@drawable/boto_skins"
+        android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/spells"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="16dp"
         android:src="@drawable/boto_spells"
+        android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/skins" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,8 +9,14 @@
         <entry key="..\:/Users/llucc/StudioProjects/leaguechamps/app/src/main/res/layout/list_of_champs_fragment.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/llucc/StudioProjects/leaguechamps/app/src/main/res/layout/single_skin.xml" value="0.23854166666666668" />
         <entry key="..\:/Users/llucc/StudioProjects/leaguechamps/app/src/main/res/layout/skins_fragment.xml" value="0.23854166666666668" />
+        <entry key="app/src/main/res/drawable/fav_false.xml" value="0.22083333333333333" />
+        <entry key="app/src/main/res/drawable/fav_icon.xml" value="0.22083333333333333" />
+        <entry key="app/src/main/res/drawable/fav_true.xml" value="0.22083333333333333" />
+        <entry key="app/src/main/res/drawable/goback.xml" value="0.22083333333333333" />
+        <entry key="app/src/main/res/drawable/search.xml" value="0.22083333333333333" />
+        <entry key="app/src/main/res/drawable/splash_background.xml" value="0.22083333333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/champion_fragment.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/champion_fragment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/list_champ.xml" value="0.29257246376811596" />
         <entry key="app/src/main/res/layout/list_of_champs_fragment.xml" value="0.36614583333333334" />
         <entry key="app/src/main/res/layout/single_skin.xml" value="0.2046875" />

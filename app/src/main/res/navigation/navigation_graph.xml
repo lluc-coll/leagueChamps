@@ -23,9 +23,30 @@
         <action
             android:id="@+id/action_championFragment_to_spellsFragment"
             app:destination="@id/spellsFragment" />
+        <action
+            android:id="@+id/action_championFragment_to_SkinFragment"
+            app:destination="@id/singleSkinActivity" />
+        <action
+            android:id="@+id/action_championFragment_to_listOfChampsFragment"
+            app:destination="@id/listOfChampsFragment" />
     </fragment>
     <fragment
         android:id="@+id/spellsFragment"
         android:name="com.example.leaguechamps.SpellsFragment"
-        android:label="SpellsFragment" />
+        android:label="SpellsFragment" >
+        <action
+            android:id="@+id/action_spellsFragment_to_championFragment"
+            app:destination="@id/championFragment" />
+        <argument
+            android:name="position"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/singleSkinActivity"
+        android:name="com.example.leaguechamps.SkinFragment"
+        android:label="SingleSkinActivity" >
+        <action
+            android:id="@+id/action_singleSkinActivity_to_championFragment"
+            app:destination="@id/championFragment" />
+    </fragment>
 </navigation>

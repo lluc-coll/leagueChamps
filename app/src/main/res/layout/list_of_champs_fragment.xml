@@ -16,10 +16,33 @@
         tools:layout_editor_absoluteX="16dp" />
 
 
+    <ImageButton
+        android:id="@+id/favIcon"
+        android:layout_width="42dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/fav_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/search"
+        android:layout_width="42dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/transparent"
+
+        android:src="@drawable/search"
+        app:layout_constraintEnd_toStartOf="@+id/favIcon"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/imageView"
-        android:layout_width="299dp"
-        android:layout_height="30dp"
+        android:layout_width="258dp"
+        android:layout_height="33dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"
         android:fontFamily="@font/lol_bold"
@@ -29,6 +52,7 @@
         android:textSize="25dp"
         app:layout_constraintBottom_toTopOf="@+id/recycler_view"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.104"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

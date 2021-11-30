@@ -3,12 +3,15 @@ package com.example.leaguechamps
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.view.View
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 
 class SpellsFragment: Fragment(R.layout.spells_fragment)  {
+    lateinit var goBack: ImageButton
     lateinit var title: TextView
 
     lateinit var PIcon: ImageView
@@ -35,6 +38,7 @@ class SpellsFragment: Fragment(R.layout.spells_fragment)  {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        goBack = view.findViewById(R.id.goBack)
         title = view.findViewById(R.id.title)
         PIcon = view.findViewById(R.id.passive)
         PName = view.findViewById(R.id.passiveName)
@@ -52,10 +56,19 @@ class SpellsFragment: Fragment(R.layout.spells_fragment)  {
         RName = view.findViewById(R.id.rSpellName)
         RDesc = view.findViewById(R.id.rSpellDesc)
 
+        val position = arguments?.getInt("position")
+
         PDesc.movementMethod = ScrollingMovementMethod()
         QDesc.movementMethod = ScrollingMovementMethod()
         WDesc.movementMethod = ScrollingMovementMethod()
         EDesc.movementMethod = ScrollingMovementMethod()
         RDesc.movementMethod = ScrollingMovementMethod()
+
+
+
+        goBack.setOnClickListener{
+            val action = SpellsFragmentDirections.actionSpellsFragmentToChampionFragment(position!!)
+            findNavController().navigate(action)
+        }
     }
 }
