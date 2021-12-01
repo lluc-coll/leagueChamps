@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChampionFragment"
-    android:background="@drawable/fons">
+    android:background="@drawable/fons"
+    tools:context=".ChampionFragment">
 
     <ImageButton
         android:id="@+id/goBack"
@@ -22,11 +22,11 @@
         android:id="@+id/favIcon"
         android:layout_width="44dp"
         android:layout_height="44dp"
-        android:scaleX="1.4"
-        android:scaleY="1.4"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:background="@android:color/transparent"
+        android:scaleX="1.4"
+        android:scaleY="1.4"
         android:src="@drawable/fav_false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/goBack" />
@@ -44,7 +44,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.583"
         app:layout_constraintStart_toEndOf="@+id/attackText"
-        app:layout_constraintTop_toBottomOf="@+id/tags" />
+        app:layout_constraintTop_toBottomOf="@+id/tag1" />
 
     <ProgressBar
         android:id="@+id/defense"
@@ -99,17 +99,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/icon" />
 
-    <TextView
-        android:id="@+id/tags"
-        android:layout_width="210dp"
-        android:layout_height="32dp"
+    <ImageView
+        android:id="@+id/tag2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginTop="8dp"
-        android:fontFamily="@font/lol"
-        android:gravity="center"
-        android:text="Fighter, Tank"
-        android:textColor="@color/grey"
-        android:textSize="20dp"
+
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tag1"
+        app:layout_constraintTop_toBottomOf="@+id/lore" />
+
+    <ImageView
+        android:id="@+id/tag1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+
+        app:layout_constraintEnd_toStartOf="@+id/tag2"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lore" />
 
@@ -121,13 +129,13 @@
         android:layout_marginTop="7dp"
         android:fontFamily="@font/lol"
         android:gravity="center"
+        android:scrollbars="vertical"
         android:text="Once honored defenders of Shurima against the Void, Aatrox and his brethren would eventually become an even greater threat to Runeterra, and were defeated only by cunning mortal sorcery. But after centuries of imprisonment, Aatrox was the first to find freedom once more, corrupting and transforming those foolish enough to try and wield the magical weapon that contained his essence. Now, with stolen flesh, he walks Runeterra in a brutal approximation of his previous form, seeking an apocalyptic and long overdue vengeance."
         android:textColor="@color/grey"
         android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        android:scrollbars="vertical"/>
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <TextView
         android:id="@+id/title"
@@ -225,7 +233,7 @@
         android:textSize="17dp"
         app:layout_constraintBottom_toTopOf="@+id/defenceText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tags" />
+        app:layout_constraintTop_toBottomOf="@+id/tag1" />
 
     <TextView
         android:id="@+id/defenceText"
@@ -276,8 +284,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
         android:layout_marginEnd="16dp"
-        android:src="@drawable/boto_skins"
         android:background="@android:color/transparent"
+        android:src="@drawable/boto_skins"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -287,8 +295,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="16dp"
-        android:src="@drawable/boto_spells"
         android:background="@android:color/transparent"
+        android:src="@drawable/boto_spells"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/skins" />
 </androidx.constraintlayout.widget.ConstraintLayout>

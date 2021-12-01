@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import android.text.method.ScrollingMovementMethod
 import android.widget.ImageButton
 import androidx.navigation.fragment.findNavController
+import com.squareup.picasso.Picasso
 
 
 class ChampionFragment: Fragment(R.layout.champion_fragment) {
@@ -19,7 +20,8 @@ class ChampionFragment: Fragment(R.layout.champion_fragment) {
     lateinit var champName: TextView
     lateinit var champTitle: TextView
     lateinit var champLore: TextView
-    lateinit var champTags: TextView
+    lateinit var champTag1: ImageView
+    lateinit var champTag2: ImageView
     lateinit var attackBar: ProgressBar
     lateinit var attackValue: TextView
     lateinit var defenceBar: ProgressBar
@@ -41,7 +43,8 @@ class ChampionFragment: Fragment(R.layout.champion_fragment) {
         champName = view.findViewById(R.id.name)
         champTitle = view.findViewById(R.id.title)
         champLore = view.findViewById(R.id.lore)
-        champTags = view.findViewById(R.id.tags)
+        champTag1 = view.findViewById(R.id.tag1)
+        champTag2 = view.findViewById(R.id.tag2)
         attackBar = view.findViewById(R.id.attack)
         attackValue = view.findViewById(R.id.attackValue)
         defenceBar = view.findViewById(R.id.defense)
@@ -59,12 +62,17 @@ class ChampionFragment: Fragment(R.layout.champion_fragment) {
         champLore.movementMethod = ScrollingMovementMethod()
 
         champIcon.setImageResource(champ.iconUrl)
+        //Picasso.with(context).load(champ.iconUrl).into(champIcon);
         champName.text = champ.name
         champTitle.text = champ.title
         champLore.text = champ.lore
-        val separator = ", "
-        val tags = champ.tags.joinToString(separator)
-        champTags.text = tags
+
+        val tag1 = "".plus("https://raw.communitydragon.org/10.1/plugins/rcp-fe-lol-hover-card/global/default/roleicon-").plus(champ.tags.get(0).lowercase()).plus(".png")
+        Picasso.with(context).load(tag1).into(champTag1);
+        if(champ.tags.size == 2){
+            val tag1 = "".plus("https://raw.communitydragon.org/10.1/plugins/rcp-fe-lol-hover-card/global/default/roleicon-").plus(champ.tags.get(1).lowercase()).plus(".png")
+            Picasso.with(context).load(tag1).into(champTag2);
+        }
         attackBar.progress = champ.attack
         attackValue.text = "".plus(champ.attack).plus("/10")
         defenceBar.progress = champ.defence
