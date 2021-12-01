@@ -47,7 +47,7 @@ class ChampionFragment: Fragment(R.layout.champion_fragment) {
         defenceBar = view.findViewById(R.id.defense)
         defenceValue = view.findViewById(R.id.defenceValue)
         magicBar = view.findViewById(R.id.magic)
-        magicValue = view.findViewById(R.id.defenceValue)
+        magicValue = view.findViewById(R.id.magicValue)
         difficultyBar = view.findViewById(R.id.difficulty)
         difficultyValue = view.findViewById(R.id.difficultyValue)
         skinsButton = view.findViewById(R.id.skins)
