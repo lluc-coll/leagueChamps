@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.squareup.picasso.Picasso
 
 class SpellsFragment: Fragment(R.layout.spells_fragment)  {
     lateinit var goBack: ImageButton
@@ -57,6 +58,7 @@ class SpellsFragment: Fragment(R.layout.spells_fragment)  {
         RDesc = view.findViewById(R.id.rSpellDesc)
 
         val position = arguments?.getInt("position")
+        val champ = viewModel.getOneList(position!!)
 
         PDesc.movementMethod = ScrollingMovementMethod()
         QDesc.movementMethod = ScrollingMovementMethod()
@@ -65,6 +67,24 @@ class SpellsFragment: Fragment(R.layout.spells_fragment)  {
         RDesc.movementMethod = ScrollingMovementMethod()
 
 
+        if(champ.spells != null){
+            title.text = champ.name.plus("Spells")
+            Picasso.get().load(champ.spells!!.PIcon).into(PIcon);
+            PName.text = champ.spells!!.PName
+            PDesc.text = champ.spells!!.PDesc
+            Picasso.get().load(champ.spells!!.QIcon).into(QIcon);
+            QName.text = champ.spells!!.QName
+            QDesc.text = champ.spells!!.QDesc
+            Picasso.get().load(champ.spells!!.WIcon).into(WIcon);
+            WName.text = champ.spells!!.WName
+            WDesc.text = champ.spells!!.WDesc
+            Picasso.get().load(champ.spells!!.EIcon).into(EIcon);
+            EName.text = champ.spells!!.EName
+            EDesc.text = champ.spells!!.EDesc
+            Picasso.get().load(champ.spells!!.RIcon).into(RIcon);
+            RName.text = champ.spells!!.RName
+            RDesc.text = champ.spells!!.RDesc
+        }
 
         goBack.setOnClickListener{
             val action = SpellsFragmentDirections.actionSpellsFragmentToChampionFragment(position!!)

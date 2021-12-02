@@ -7,6 +7,7 @@ import android.widget.AdapterView
 import android.widget.TextView
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 
 class ListOfChampsAdapter(private val champs: List<Champion>, private val listener: OnItemClickListener) : RecyclerView.Adapter<ListOfChampsAdapter.ListOfChampsViewHolder>() {
 
@@ -34,7 +35,7 @@ class ListOfChampsAdapter(private val champs: List<Champion>, private val listen
         }
 
         fun bindData(champ: Champion){
-            champIcon.setImageResource(champ.iconUrl)
+            Picasso.get().load(champ.iconUrl).into(champIcon);
             champName.text = champ.name
 
             itemView.setOnClickListener(this)

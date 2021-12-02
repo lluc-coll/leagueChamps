@@ -61,17 +61,20 @@ class ChampionFragment: Fragment(R.layout.champion_fragment) {
 
         champLore.movementMethod = ScrollingMovementMethod()
 
-        champIcon.setImageResource(champ.iconUrl)
-        //Picasso.with(context).load(champ.iconUrl).into(champIcon);
+        if(champ.fav){
+            favIcon.setImageResource(R.drawable.fav_true)
+        }
+
+        Picasso.get().load(champ.iconUrl).into(champIcon);
         champName.text = champ.name
         champTitle.text = champ.title
         champLore.text = champ.lore
 
         val tag1 = "".plus("https://raw.communitydragon.org/10.1/plugins/rcp-fe-lol-hover-card/global/default/roleicon-").plus(champ.tags.get(0).lowercase()).plus(".png")
-        Picasso.with(context).load(tag1).into(champTag1);
+        Picasso.get().load(tag1).into(champTag1);
         if(champ.tags.size == 2){
             val tag1 = "".plus("https://raw.communitydragon.org/10.1/plugins/rcp-fe-lol-hover-card/global/default/roleicon-").plus(champ.tags.get(1).lowercase()).plus(".png")
-            Picasso.with(context).load(tag1).into(champTag2);
+            Picasso.get().load(tag1).into(champTag2);
         }
         attackBar.progress = champ.attack
         attackValue.text = "".plus(champ.attack).plus("/10")
@@ -86,6 +89,17 @@ class ChampionFragment: Fragment(R.layout.champion_fragment) {
         goBack.setOnClickListener{
             val action = ChampionFragmentDirections.actionChampionFragmentToListOfChampsFragment()
             findNavController().navigate(action)
+        }
+
+        favIcon.setOnClickListener{
+            if(champ.fav){
+                viewModel.champList.get(position).fav = false
+                favIcon.setImageResource(R.drawable.fav_false)
+            }
+            else{
+                viewModel.champList.get(position).fav = true
+                favIcon.setImageResource(R.drawable.fav_true)
+            }
         }
 
         spellsButton.setOnClickListener{
