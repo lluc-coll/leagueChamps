@@ -21,7 +21,7 @@ class ListOfChampsFragment : Fragment(R.layout.list_of_champs_fragment), ListOfC
         search = view.findViewById(R.id.search)
         favIcon = view.findViewById(R.id.favIcon)
         recyclerView = view.findViewById(R.id.recycler_view)
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), 4)
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 5)
         val adapter = ListOfChampsAdapter(viewModel.getLists(), this)
         recyclerView.adapter = adapter
     }

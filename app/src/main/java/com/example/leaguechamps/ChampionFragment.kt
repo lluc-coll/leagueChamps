@@ -109,7 +109,7 @@ class ChampionFragment: Fragment(R.layout.champion_fragment) {
         }
 
         skinsButton.setOnClickListener{
-            val action = ChampionFragmentDirections.actionChampionFragmentToSkinFragment()
+            val action = ChampionFragmentDirections.actionChampionFragmentToSkinFragment(position)
             findNavController().navigate(action)
         }
     }

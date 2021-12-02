@@ -87,7 +87,7 @@ class SpellsFragment: Fragment(R.layout.spells_fragment)  {
         }
 
         goBack.setOnClickListener{
-            val action = SpellsFragmentDirections.actionSpellsFragmentToChampionFragment(position!!)
+            val action = SpellsFragmentDirections.actionSpellsFragmentToChampionFragment(position)
             findNavController().navigate(action)
         }
     }

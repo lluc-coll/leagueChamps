@@ -25,7 +25,7 @@
             app:destination="@id/spellsFragment" />
         <action
             android:id="@+id/action_championFragment_to_SkinFragment"
-            app:destination="@id/singleSkinActivity" />
+            app:destination="@id/SkinFragment" />
         <action
             android:id="@+id/action_championFragment_to_listOfChampsFragment"
             app:destination="@id/listOfChampsFragment" />
@@ -42,11 +42,14 @@
             app:argType="integer" />
     </fragment>
     <fragment
-        android:id="@+id/singleSkinActivity"
+        android:id="@+id/SkinFragment"
         android:name="com.example.leaguechamps.SkinFragment"
         android:label="SingleSkinActivity" >
         <action
-            android:id="@+id/action_singleSkinActivity_to_championFragment"
+            android:id="@+id/action_SkinFragment_to_championFragment"
             app:destination="@id/championFragment" />
+        <argument
+            android:name="position"
+            app:argType="integer" />
     </fragment>
 </navigation>
