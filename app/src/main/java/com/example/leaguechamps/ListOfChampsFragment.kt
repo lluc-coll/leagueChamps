@@ -1,6 +1,7 @@
 package com.example.leaguechamps
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
@@ -23,7 +24,14 @@ class ListOfChampsFragment : Fragment(R.layout.list_of_champs_fragment), ListOfC
         recyclerView = view.findViewById(R.id.recycler_view)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 5)
         val adapter = ListOfChampsAdapter(viewModel.getLists(), this)
-        recyclerView.adapter = adapter
+        if (viewModel.ft){
+            viewModel.ft = false
+        Handler().postDelayed({
+            recyclerView.adapter = adapter
+        }, 1000)}
+        else{
+            recyclerView.adapter = adapter
+        }
     }
 
     override fun onItemClick(position: Int) {

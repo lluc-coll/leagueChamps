@@ -70,19 +70,19 @@ class ChampionFragment: Fragment(R.layout.champion_fragment) {
         champTitle.text = champ.title
         champLore.text = champ.lore
 
-        val tag1 = "".plus("https://raw.communitydragon.org/10.1/plugins/rcp-fe-lol-hover-card/global/default/roleicon-").plus(champ.tags.get(0).lowercase()).plus(".png")
+        val tag1 = "".plus("https://raw.communitydragon.org/10.1/plugins/rcp-fe-lol-hover-card/global/default/roleicon-").plus(champ.tags!!.get(0).lowercase()).plus(".png")
         Picasso.get().load(tag1).into(champTag1);
         if(champ.tags.size == 2){
-            val tag1 = "".plus("https://raw.communitydragon.org/10.1/plugins/rcp-fe-lol-hover-card/global/default/roleicon-").plus(champ.tags.get(1).lowercase()).plus(".png")
+            val tag1 = "".plus("https://raw.communitydragon.org/10.1/plugins/rcp-fe-lol-hover-card/global/default/roleicon-").plus(champ.tags!!.get(1).lowercase()).plus(".png")
             Picasso.get().load(tag1).into(champTag2);
         }
-        attackBar.progress = champ.attack
+        attackBar.progress = champ.attack!!
         attackValue.text = "".plus(champ.attack).plus("/10")
-        defenceBar.progress = champ.defence
+        defenceBar.progress = champ.defence!!
         defenceValue.text = "".plus(champ.defence).plus("/10")
-        magicBar.progress = champ.magic
+        magicBar.progress = champ.magic!!
         magicValue.text = "".plus(champ.magic).plus("/10")
-        difficultyBar.progress = champ.difficulty
+        difficultyBar.progress = champ.difficulty!!
         difficultyValue.text = "".plus(champ.difficulty).plus("/10")
 
 
