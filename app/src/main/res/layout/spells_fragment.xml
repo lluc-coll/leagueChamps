@@ -25,7 +25,6 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/lol_bold"
         android:gravity="center"
-        android:text="Aatrox Spells"
         android:textColor="@color/gold"
         android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,7 +36,6 @@
         android:layout_width="59dp"
         android:layout_height="55dp"
         android:layout_marginStart="22dp"
-        android:src="@drawable/base"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passiveName" />
 
@@ -61,7 +59,6 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/lol_bold"
         android:gravity="center"
-        android:text="Deathbringer Stance"
         android:textColor="@color/grey"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -78,7 +75,6 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/lol"
         android:gravity="center_horizontal"
-        android:text="Periodically, Aatrox's next basic attack deals bonus physical damage and heals him, based on the target's max health."
         android:textColor="@color/grey"
         android:textSize="14dp"
         android:scrollbars="vertical"
@@ -93,7 +89,6 @@
         android:layout_width="67dp"
         android:layout_height="64dp"
         android:layout_marginStart="22dp"
-        android:src="@drawable/base"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/qSpellName" />
 
@@ -117,7 +112,6 @@
         android:layout_marginTop="22dp"
         android:fontFamily="@font/lol_bold"
         android:gravity="center"
-        android:text="The Darkin Blade"
         android:textColor="@color/grey"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -133,7 +127,6 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/lol"
         android:gravity="center_horizontal"
-        android:text="Aatrox slams his greatsword down, dealing physical damage. He can swing three times, each with a different area of effect."
         android:textColor="@color/grey"
         android:textSize="14dp"
         android:scrollbars="vertical"
@@ -147,7 +140,6 @@
         android:layout_width="67dp"
         android:layout_height="64dp"
         android:layout_marginStart="22dp"
-        android:src="@drawable/base"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/wSpellName" />
 
@@ -171,7 +163,6 @@
         android:layout_marginTop="22dp"
         android:fontFamily="@font/lol_bold"
         android:gravity="center"
-        android:text="Infernal Chains"
         android:textColor="@color/grey"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -187,7 +178,6 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/lol"
         android:gravity="center_horizontal"
-        android:text="Aatrox smashes the ground, dealing damage to the first enemy hit. Champions and large monsters have to leave the impact area quickly or they will be dragged to the center and take the damage again."
         android:textColor="@color/grey"
         android:textSize="14dp"
         android:scrollbars="vertical"
@@ -201,7 +191,6 @@
         android:layout_width="67dp"
         android:layout_height="64dp"
         android:layout_marginStart="22dp"
-        android:src="@drawable/base"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/eSpellName" />
 
@@ -225,7 +214,6 @@
         android:layout_marginTop="22dp"
         android:fontFamily="@font/lol_bold"
         android:gravity="center"
-        android:text="Umbral Dash"
         android:textColor="@color/grey"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -241,7 +229,6 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/lol"
         android:gravity="center_horizontal"
-        android:text="Passively, Aatrox heals when damaging enemy champions. On activation, he dashes in a direction."
         android:textColor="@color/grey"
         android:textSize="14dp"
         android:scrollbars="vertical"
@@ -255,7 +242,6 @@
         android:layout_width="67dp"
         android:layout_height="64dp"
         android:layout_marginStart="22dp"
-        android:src="@drawable/base"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rSpellName" />
 
@@ -279,7 +265,6 @@
         android:layout_marginTop="22dp"
         android:fontFamily="@font/lol_bold"
         android:gravity="center"
-        android:text="World Ender"
         android:textColor="@color/grey"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -295,7 +280,6 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/lol"
         android:gravity="center_horizontal"
-        android:text="Aatrox unleashes his demonic form, fearing nearby enemy minions and gaining attack damage, increased healing, and movement speed. If he gets a takedown, this effect is extended."
         android:textColor="@color/grey"
         android:textSize="14dp"
         android:scrollbars="vertical"

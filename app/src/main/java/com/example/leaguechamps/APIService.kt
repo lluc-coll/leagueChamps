@@ -13,7 +13,7 @@ interface APIService {
     @GET("/cdn/11.23.1/data/en_US/champion.json")
     fun getChampions(): Call<ChampionListData>?
 
-    @GET("/cdn/11.23.1/data/en_US/{championName}.json")
+    @GET("/cdn/11.23.1/data/en_US/champion/{championName}.json")
     fun getChampion(@Path("championName") championName: String): Call<ChampionListData>?
 
     companion object {

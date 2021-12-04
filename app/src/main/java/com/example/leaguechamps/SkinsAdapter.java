@@ -14,6 +14,7 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
 import java.util.Objects;
 
 class SkinsAdapter extends PagerAdapter {
@@ -22,14 +23,14 @@ class SkinsAdapter extends PagerAdapter {
     Context context;
 
     // Array of images
-    Skin[] skins;
+    List<Skin> skins;
 
     // Layout Inflater
     LayoutInflater mLayoutInflater;
 
 
     // Viewpager Constructor
-    public SkinsAdapter(Context context, Skin[] skins) {
+    public SkinsAdapter(Context context, List<Skin> skins) {
         this.context = context;
         this.skins = skins;
         mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -38,7 +39,7 @@ class SkinsAdapter extends PagerAdapter {
     @Override
     public int getCount() {
         // return the number of images
-        return skins.length;
+        return skins.size();
     }
 
     @Override
@@ -57,8 +58,8 @@ class SkinsAdapter extends PagerAdapter {
         TextView skinText = (TextView) itemView.findViewById(R.id.skin_name);
 
         // setting the image in the imageView
-        Picasso.get().load(skins[position].getPhoto()).into(skinImage);
-        skinText.setText(skins[position].getName());
+        Picasso.get().load(skins.get(position).getPhoto()).into(skinImage);
+        skinText.setText(skins.get(position).getName());
 
         // Adding the View
         Objects.requireNonNull(container).addView(itemView);

@@ -1,6 +1,7 @@
 package com.example.leaguechamps
 
 import android.os.Bundle
+import android.os.Handler
 import android.text.method.ScrollingMovementMethod
 import android.view.View
 import android.widget.ImageButton
@@ -67,28 +68,64 @@ class SpellsFragment: Fragment(R.layout.spells_fragment)  {
         RDesc.movementMethod = ScrollingMovementMethod()
 
 
-        if(champ.spells != null){
-            title.text = champ.name.plus("Spells")
-            Picasso.get().load(champ.spells!!.PIcon).into(PIcon);
-            PName.text = champ.spells!!.PName
-            PDesc.text = champ.spells!!.PDesc
-            Picasso.get().load(champ.spells!!.QIcon).into(QIcon);
-            QName.text = champ.spells!!.QName
-            QDesc.text = champ.spells!!.QDesc
-            Picasso.get().load(champ.spells!!.WIcon).into(WIcon);
-            WName.text = champ.spells!!.WName
-            WDesc.text = champ.spells!!.WDesc
-            Picasso.get().load(champ.spells!!.EIcon).into(EIcon);
-            EName.text = champ.spells!!.EName
-            EDesc.text = champ.spells!!.EDesc
-            Picasso.get().load(champ.spells!!.RIcon).into(RIcon);
-            RName.text = champ.spells!!.RName
-            RDesc.text = champ.spells!!.RDesc
+        var extra = ChampExtra("null", "null", null, null)
+
+        for (i in 0..viewModel.champExtras.size-1){
+            if(viewModel.champExtras.get(i).champId!!.equals(champ.id)){
+                extra = viewModel.champExtras.get(i)
+            }
         }
+
+        if(extra.champId!!.equals("null")){
+            viewModel.extendedChamp(champ.id.toString(), position)
+            Handler().postDelayed({
+                for (i in 0..viewModel.champExtras.size-1){
+                    if(viewModel.champExtras.get(i).champId!!.equals(champ.id)){
+                        extra = viewModel.champExtras.get(i)
+                    }
+                }
+                title.text = extra.name.plus("Spells")
+                Picasso.get().load(extra.spells!!.PIcon).into(PIcon);
+                PName.text = extra.spells!!.PName
+                PDesc.text = extra.spells!!.PDesc
+                Picasso.get().load(extra.spells!!.QIcon).into(QIcon);
+                QName.text = extra.spells!!.QName
+                QDesc.text = extra.spells!!.QDesc
+                Picasso.get().load(extra.spells!!.WIcon).into(WIcon);
+                WName.text = extra.spells!!.WName
+                WDesc.text = extra.spells!!.WDesc
+                Picasso.get().load(extra.spells!!.EIcon).into(EIcon);
+                EName.text = extra.spells!!.EName
+                EDesc.text = extra.spells!!.EDesc
+                Picasso.get().load(extra.spells!!.RIcon).into(RIcon);
+                RName.text = extra.spells!!.RName
+                RDesc.text = extra.spells!!.RDesc
+            }, 1000)
+        }
+        else{
+            title.text = extra.name.plus("Spells")
+            Picasso.get().load(extra.spells!!.PIcon).into(PIcon);
+            PName.text = extra.spells!!.PName
+            PDesc.text = extra.spells!!.PDesc
+            Picasso.get().load(extra.spells!!.QIcon).into(QIcon);
+            QName.text = extra.spells!!.QName
+            QDesc.text = extra.spells!!.QDesc
+            Picasso.get().load(extra.spells!!.WIcon).into(WIcon);
+            WName.text = extra.spells!!.WName
+            WDesc.text = extra.spells!!.WDesc
+            Picasso.get().load(extra.spells!!.EIcon).into(EIcon);
+            EName.text = extra.spells!!.EName
+            EDesc.text = extra.spells!!.EDesc
+            Picasso.get().load(extra.spells!!.RIcon).into(RIcon);
+            RName.text = extra.spells!!.RName
+            RDesc.text = extra.spells!!.RDesc
+        }
+
 
         goBack.setOnClickListener{
             val action = SpellsFragmentDirections.actionSpellsFragmentToChampionFragment(position)
             findNavController().navigate(action)
         }
+
     }
 }
