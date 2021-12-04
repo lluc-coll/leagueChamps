@@ -36,7 +36,7 @@ class SpellsFragment: Fragment(R.layout.spells_fragment)  {
     lateinit var RName: TextView
     lateinit var RDesc: TextView
 
-    private val viewModel: ChampViewModel by activityViewModels()
+    private val viewModel: LeagueViewModel by activityViewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

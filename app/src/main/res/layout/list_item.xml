@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:padding="5dp">
+
+
+    <ImageView
+        android:id="@+id/item_icon"
+        android:layout_width="70dp"
+        android:layout_height="58dp"
+        android:src="@drawable/base"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/item_name"
+        android:layout_width="208dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/lol_bold"
+        android:gravity="center_vertical"
+        android:text="Twisted Fate"
+        android:textColor="@color/gold"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/item_icon"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/item_desc"
+        android:layout_width="283dp"
+        android:layout_height="32dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/lol"
+        android:scrollbars="vertical"
+        android:text="asdasda asdasdasda, asdasdasda"
+        android:textColor="@color/grey"
+        android:textSize="10sp"
+        app:layout_constraintStart_toEndOf="@+id/item_icon"
+        app:layout_constraintTop_toBottomOf="@+id/item_name" />
+
+    <ImageView
+        android:id="@+id/itemgoldimage"
+        android:layout_width="24dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/goldicon"
+        app:layout_constraintBottom_toTopOf="@+id/item_desc"
+        app:layout_constraintStart_toEndOf="@+id/item_name" />
+
+    <TextView
+        android:id="@+id/item_gold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginBottom="14dp"
+        android:fontFamily="@font/lol"
+        android:scrollbars="vertical"
+        android:text="9999"
+        android:textColor="@color/gold"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/item_desc"
+        app:layout_constraintStart_toEndOf="@+id/itemgoldimage" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

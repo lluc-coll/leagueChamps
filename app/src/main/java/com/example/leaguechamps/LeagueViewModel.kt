@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.leaguechamps.dataclass.ChampionListData
+import com.example.leaguechamps.dataclass.ItemList
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -12,9 +13,10 @@ import java.net.URL
 import kotlin.random.Random
 
 
-class ChampViewModel: ViewModel() {
+class LeagueViewModel: ViewModel() {
     var champList = mutableListOf<Champion>()
     var champExtras = mutableListOf<ChampExtra>()
+    var itemList = mutableListOf<Item>()
     var ft = true
 
     //var newOrOld = false
@@ -24,9 +26,7 @@ class ChampViewModel: ViewModel() {
         //champList.add(champ)
 
         loadChamps()
-        extendedChamp("Draven", 23)
-        extendedChamp("Aatrox", 0)
-        extendedChamp("Akali", 2)
+        loadItems()
     }
 
 
@@ -41,8 +41,8 @@ class ChampViewModel: ViewModel() {
                     val prova = champ!!.data!!.keys.toTypedArray()
                     for (i in 0..champ!!.data!!.size-1){
                         val cData = champ.data!![prova[i]]
-                        val newChamp = Champion(cData!!.id, cData.name, cData.title, imageIcon(cData.image!!.full!!), cData.blurb,
-                            cData.tags, cData.info!!.attack, cData.info!!.defense, cData.info!!.magic, cData.info!!.difficulty, false)
+                        val newChamp = Champion(cData!!.id!!, cData.name!!, cData.title!!, imageIcon(cData.image!!.full!!), cData.blurb!!,
+                            cData.tags!!, cData.info!!.attack!!, cData.info!!.defense!!, cData.info!!.magic!!, cData.info!!.difficulty!!, false)
 
                         champList.add(newChamp)
                     }
@@ -96,12 +96,36 @@ class ChampViewModel: ViewModel() {
         })
     }
 
+    fun loadItems(){
+        val requestCall = APIService.create()
+        val call = requestCall.getItems()
+
+        call!!.enqueue(object : Callback<ItemList> {
+            override fun onResponse(call: Call<ItemList>, response: Response<ItemList>) {
+                if (response.isSuccessful){
+                    val item = response.body()
+                    val prova = item!!.data!!.keys.toTypedArray()
+                    for (i in 0..item!!.data!!.size-1){
+                        val cData = item.data!![prova[i]]
+                        val newItem = Item(imageItem(cData!!.image!!.full!!), cData.name!!, cData.plaintext!!, cData.gold!!.total!!)
+
+                        itemList.add(newItem)
+                    }
+                }
+            }
+            override fun onFailure(call: Call<ItemList>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
+    }
+
 
     fun imageIcon(name: String): String{ return "https://ddragon.leagueoflegends.com/cdn/11.23.1/img/champion/$name" }
     fun imageSpell(name: String): String{ return "https://ddragon.leagueoflegends.com/cdn/11.23.1/img/spell/$name" }
     fun imagePassive(name: String): String{ return "https://ddragon.leagueoflegends.com/cdn/11.23.1/img/passive/$name" }
     fun imageSkin(name: Any, num: Int): String{ return "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${name}_${num}.jpg" }
     fun imageSkinLand(name: Any, num: Int): String{ return "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${name}_${num}.jpg" }
+    fun imageItem(name: String): String{ return "https://ddragon.leagueoflegends.com/cdn/11.23.1/img/item/$name"}
 
     fun jsonError(desc: String): String{
         var dinsError = false
@@ -122,7 +146,8 @@ class ChampViewModel: ViewModel() {
         return final
     }
 
-    fun getLists() = champList
+    fun getChamps() = champList
+    fun getItems() = itemList
 
     fun getOneList(position: Int) = champList[position]
 

@@ -32,7 +32,7 @@ class ChampionFragment: Fragment(R.layout.champion_fragment) {
     lateinit var difficultyValue: TextView
     lateinit var skinsButton: ImageButton
     lateinit var spellsButton: ImageButton
-    private val viewModel: ChampViewModel by activityViewModels()
+    private val viewModel: LeagueViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -103,7 +103,6 @@ class ChampionFragment: Fragment(R.layout.champion_fragment) {
         }
 
         spellsButton.setOnClickListener{
-            //val spells = Spells(1, "d", "d", 1, "d", "d", 1, "d", "d", 1, "d", "d", 1, "d", "d")
             val action = ChampionFragmentDirections.actionChampionFragmentToSpellsFragment(position)
             findNavController().navigate(action)
         }
@@ -113,5 +112,4 @@ class ChampionFragment: Fragment(R.layout.champion_fragment) {
             findNavController().navigate(action)
         }
     }
-
 }

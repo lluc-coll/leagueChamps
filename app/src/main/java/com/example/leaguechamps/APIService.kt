@@ -1,6 +1,7 @@
 package com.example.leaguechamps
 
 import com.example.leaguechamps.dataclass.ChampionListData
+import com.example.leaguechamps.dataclass.ItemList
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -16,6 +17,11 @@ interface APIService {
     @GET("/cdn/11.23.1/data/en_US/champion/{championName}.json")
     fun getChampion(@Path("championName") championName: String): Call<ChampionListData>?
 
+    @GET("/cdn/11.23.1/data/en_US/item.json")
+    fun getItems(): Call<ItemList>?
+
+
+
     companion object {
         val BASE_URL = "https://ddragon.leagueoflegends.com/"
 
@@ -28,7 +34,6 @@ interface APIService {
                 .build()
             return retrofit.create(APIService::class.java)
         }
-
     }
 
 }
