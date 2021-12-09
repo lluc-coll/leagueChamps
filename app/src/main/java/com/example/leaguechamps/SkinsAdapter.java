@@ -50,18 +50,14 @@ class SkinsAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, final int position) {
-        // inflating the item.xml
         View itemView = mLayoutInflater.inflate(R.layout.single_skin, container, false);
 
-        // referencing the image view from the item.xml file
         ImageView skinImage = (ImageView) itemView.findViewById(R.id.skin);
         TextView skinText = (TextView) itemView.findViewById(R.id.skin_name);
 
-        // setting the image in the imageView
         Picasso.get().load(skins.get(position).getPhoto()).into(skinImage);
         skinText.setText(skins.get(position).getName());
 
-        // Adding the View
         Objects.requireNonNull(container).addView(itemView);
 
         return itemView;

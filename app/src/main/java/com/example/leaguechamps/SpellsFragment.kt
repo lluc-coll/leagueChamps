@@ -1,7 +1,6 @@
 package com.example.leaguechamps
 
 import android.os.Bundle
-import android.os.Handler
 import android.text.method.ScrollingMovementMethod
 import android.view.View
 import android.widget.ImageButton
@@ -59,7 +58,8 @@ class SpellsFragment: Fragment(R.layout.spells_fragment)  {
         RDesc = view.findViewById(R.id.rSpellDesc)
 
         val position = arguments?.getInt("position")
-        val champ = viewModel.getOneList(position!!)
+        val champ = viewModel.getOneChamp(position!!)
+        viewModel.favs = false
 
         PDesc.movementMethod = ScrollingMovementMethod()
         QDesc.movementMethod = ScrollingMovementMethod()
@@ -76,50 +76,23 @@ class SpellsFragment: Fragment(R.layout.spells_fragment)  {
             }
         }
 
-        if(extra.champId!!.equals("null")){
-            viewModel.extendedChamp(champ.id.toString(), position)
-            Handler().postDelayed({
-                for (i in 0..viewModel.champExtras.size-1){
-                    if(viewModel.champExtras.get(i).champId!!.equals(champ.id)){
-                        extra = viewModel.champExtras.get(i)
-                    }
-                }
-                title.text = extra.name.plus("Spells")
-                Picasso.get().load(extra.spells!!.PIcon).into(PIcon);
-                PName.text = extra.spells!!.PName
-                PDesc.text = extra.spells!!.PDesc
-                Picasso.get().load(extra.spells!!.QIcon).into(QIcon);
-                QName.text = extra.spells!!.QName
-                QDesc.text = extra.spells!!.QDesc
-                Picasso.get().load(extra.spells!!.WIcon).into(WIcon);
-                WName.text = extra.spells!!.WName
-                WDesc.text = extra.spells!!.WDesc
-                Picasso.get().load(extra.spells!!.EIcon).into(EIcon);
-                EName.text = extra.spells!!.EName
-                EDesc.text = extra.spells!!.EDesc
-                Picasso.get().load(extra.spells!!.RIcon).into(RIcon);
-                RName.text = extra.spells!!.RName
-                RDesc.text = extra.spells!!.RDesc
-            }, 1000)
-        }
-        else{
-            title.text = extra.name.plus("Spells")
-            Picasso.get().load(extra.spells!!.PIcon).into(PIcon);
-            PName.text = extra.spells!!.PName
-            PDesc.text = extra.spells!!.PDesc
-            Picasso.get().load(extra.spells!!.QIcon).into(QIcon);
-            QName.text = extra.spells!!.QName
-            QDesc.text = extra.spells!!.QDesc
-            Picasso.get().load(extra.spells!!.WIcon).into(WIcon);
-            WName.text = extra.spells!!.WName
-            WDesc.text = extra.spells!!.WDesc
-            Picasso.get().load(extra.spells!!.EIcon).into(EIcon);
-            EName.text = extra.spells!!.EName
-            EDesc.text = extra.spells!!.EDesc
-            Picasso.get().load(extra.spells!!.RIcon).into(RIcon);
-            RName.text = extra.spells!!.RName
-            RDesc.text = extra.spells!!.RDesc
-        }
+
+        title.text = extra.name.plus("Spells")
+        Picasso.get().load(extra.spells!!.PIcon).into(PIcon);
+        PName.text = extra.spells!!.PName
+        PDesc.text = extra.spells!!.PDesc
+        Picasso.get().load(extra.spells!!.QIcon).into(QIcon);
+        QName.text = extra.spells!!.QName
+        QDesc.text = extra.spells!!.QDesc
+        Picasso.get().load(extra.spells!!.WIcon).into(WIcon);
+        WName.text = extra.spells!!.WName
+        WDesc.text = extra.spells!!.WDesc
+        Picasso.get().load(extra.spells!!.EIcon).into(EIcon);
+        EName.text = extra.spells!!.EName
+        EDesc.text = extra.spells!!.EDesc
+        Picasso.get().load(extra.spells!!.RIcon).into(RIcon);
+        RName.text = extra.spells!!.RName
+        RDesc.text = extra.spells!!.RDesc
 
 
         goBack.setOnClickListener{

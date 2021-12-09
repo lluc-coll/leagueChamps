@@ -54,7 +54,7 @@
 
     <TextView
         android:id="@+id/passiveName"
-        android:layout_width="210dp"
+        android:layout_width="335dp"
         android:layout_height="32dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/lol_bold"
@@ -107,7 +107,7 @@
 
     <TextView
         android:id="@+id/qSpellName"
-        android:layout_width="210dp"
+        android:layout_width="335dp"
         android:layout_height="32dp"
         android:layout_marginTop="22dp"
         android:fontFamily="@font/lol_bold"
@@ -158,7 +158,7 @@
 
     <TextView
         android:id="@+id/wSpellName"
-        android:layout_width="210dp"
+        android:layout_width="335dp"
         android:layout_height="32dp"
         android:layout_marginTop="22dp"
         android:fontFamily="@font/lol_bold"
@@ -209,7 +209,7 @@
 
     <TextView
         android:id="@+id/eSpellName"
-        android:layout_width="210dp"
+        android:layout_width="335dp"
         android:layout_height="32dp"
         android:layout_marginTop="22dp"
         android:fontFamily="@font/lol_bold"
@@ -260,7 +260,7 @@
 
     <TextView
         android:id="@+id/rSpellName"
-        android:layout_width="210dp"
+        android:layout_width="335dp"
         android:layout_height="32dp"
         android:layout_marginTop="22dp"
         android:fontFamily="@font/lol_bold"

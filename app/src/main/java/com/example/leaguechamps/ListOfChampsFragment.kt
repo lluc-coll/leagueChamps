@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class ListOfChampsFragment : Fragment(R.layout.list_of_champs_fragment), ListOfChampsAdapter.OnItemClickListener{
+    lateinit var config: ImageButton
     lateinit var search: ImageButton
     lateinit var favIcon: ImageButton
     lateinit var champButton: ImageButton
@@ -21,6 +22,7 @@ class ListOfChampsFragment : Fragment(R.layout.list_of_champs_fragment), ListOfC
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        config = view.findViewById(R.id.config)
         search = view.findViewById(R.id.search)
         favIcon = view.findViewById(R.id.favIcon)
         champButton = view.findViewById(R.id.champ_button)
@@ -40,20 +42,25 @@ class ListOfChampsFragment : Fragment(R.layout.list_of_champs_fragment), ListOfC
 
 
         champButton.setOnClickListener{
-            if(recyclerView.adapter!!.equals(itemAdapter)){
-                champButton.setImageResource(R.drawable.champ_text_high)
-                itemButton.setImageResource(R.drawable.item_text)
-                recyclerView.layoutManager = GridLayoutManager(requireContext(), 5)
-                recyclerView.adapter = champAdapter
-            }
+            champButton.setImageResource(R.drawable.champ_text_high)
+            itemButton.setImageResource(R.drawable.item_text)
+            recyclerView.layoutManager = GridLayoutManager(requireContext(), 5)
+            recyclerView.adapter = champAdapter
+            viewModel.favs = false
         }
 
         itemButton.setOnClickListener{
+            champButton.setImageResource(R.drawable.champ_text)
+            itemButton.setImageResource(R.drawable.item_text_high)
+            recyclerView.layoutManager = GridLayoutManager(requireContext(), 1)
+            recyclerView.adapter = itemAdapter
+            viewModel.favs = false
+        }
+
+        favIcon.setOnClickListener{
             if(recyclerView.adapter!!.equals(champAdapter)){
-                champButton.setImageResource(R.drawable.champ_text)
-                itemButton.setImageResource(R.drawable.item_text_high)
-                recyclerView.layoutManager = GridLayoutManager(requireContext(), 1)
-                recyclerView.adapter = itemAdapter
+                recyclerView.adapter = ListOfChampsAdapter(viewModel.favChamps(), this)
+                viewModel.favs = true
             }
         }
     }

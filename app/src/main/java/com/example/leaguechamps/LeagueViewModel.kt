@@ -18,6 +18,9 @@ class LeagueViewModel: ViewModel() {
     var champExtras = mutableListOf<ChampExtra>()
     var itemList = mutableListOf<Item>()
     var ft = true
+    var version = "11.24.1"
+    var language = "en_US"
+    var favs = false
 
     //var newOrOld = false
 
@@ -32,16 +35,16 @@ class LeagueViewModel: ViewModel() {
 
     fun loadChamps(){
         val requestCall = APIService.create()
-        val call = requestCall.getChampions()
+        val call = requestCall.getChampions(version, language)
 
         call!!.enqueue(object : Callback<ChampionListData> {
             override fun onResponse(call: Call<ChampionListData>, response: Response<ChampionListData>) {
                 if (response.isSuccessful){
                     val champ = response.body()
                     val prova = champ!!.data!!.keys.toTypedArray()
-                    for (i in 0..champ!!.data!!.size-1){
+                    for (i in 0..champ.data!!.size-1){
                         val cData = champ.data!![prova[i]]
-                        val newChamp = Champion(cData!!.id!!, cData.name!!, cData.title!!, imageIcon(cData.image!!.full!!), cData.blurb!!,
+                        val newChamp = Champion(i, cData!!.id!!, cData.name!!, cData.title!!, imageIcon(version, cData.image!!.full!!), cData.blurb!!,
                             cData.tags!!, cData.info!!.attack!!, cData.info!!.defense!!, cData.info!!.magic!!, cData.info!!.difficulty!!, false)
 
                         champList.add(newChamp)
@@ -57,7 +60,7 @@ class LeagueViewModel: ViewModel() {
 
     fun extendedChamp(idChamp: String, position: Int){
         val requestCall = APIService.create()
-        val call = requestCall.getChampion(idChamp)
+        val call = requestCall.getChampion(version, language, idChamp)
 
         call!!.enqueue(object : Callback<ChampionListData> {
             override fun onResponse(call: Call<ChampionListData>, response: Response<ChampionListData>) {
@@ -65,15 +68,17 @@ class LeagueViewModel: ViewModel() {
                     val champ = response.body()
                     val prova = champ!!.data!!.keys.toTypedArray()
 
+                    champList.get(position).lore = champ.data!![prova[0]]!!.lore!!
 
-                    for (i in 0..champ!!.data!!.size-1){
+
+                    for (i in 0..champ.data!!.size-1){
                         val cData = champ.data!![prova[i]]
                         val newSpells = Spells(idChamp, cData!!.name!!,
-                            imagePassive(cData!!.passive!!.image!!.full!!), cData.passive!!.name!!, cData.passive!!.description!!,
-                            imageSpell(cData.spells!![0].image!!.full!!), cData.spells!![0].name!!, cData.spells!![0].description!!,
-                            imageSpell(cData.spells!![1].image!!.full!!), cData.spells!![1].name!!, cData.spells!![1].description!!,
-                            imageSpell(cData.spells!![2].image!!.full!!), cData.spells!![2].name!!, cData.spells!![2].description!!,
-                            imageSpell(cData.spells!![3].image!!.full!!), cData.spells!![3].name!!, cData.spells!![3].description!!,
+                            imagePassive(version, cData.passive!!.image!!.full!!), cData.passive!!.name!!, cData.passive!!.description!!,
+                            imageSpell(version, cData.spells!![0].image!!.full!!), cData.spells!![0].name!!, cData.spells!![0].description!!,
+                            imageSpell(version, cData.spells!![1].image!!.full!!), cData.spells!![1].name!!, cData.spells!![1].description!!,
+                            imageSpell(version, cData.spells!![2].image!!.full!!), cData.spells!![2].name!!, cData.spells!![2].description!!,
+                            imageSpell(version, cData.spells!![3].image!!.full!!), cData.spells!![3].name!!, cData.spells!![3].description!!,
                         )
 
 
@@ -98,19 +103,26 @@ class LeagueViewModel: ViewModel() {
 
     fun loadItems(){
         val requestCall = APIService.create()
-        val call = requestCall.getItems()
+        val call = requestCall.getItems(version, language)
 
         call!!.enqueue(object : Callback<ItemList> {
             override fun onResponse(call: Call<ItemList>, response: Response<ItemList>) {
                 if (response.isSuccessful){
                     val item = response.body()
                     val prova = item!!.data!!.keys.toTypedArray()
-                    for (i in 0..item!!.data!!.size-1){
+                    for (i in 0..item.data!!.size-1){
                         val cData = item.data!![prova[i]]
-                        val newItem = Item(imageItem(cData!!.image!!.full!!), cData.name!!, cData.plaintext!!, cData.gold!!.total!!)
+                        var text = cData!!.plaintext
+                        if (cData.plaintext.equals("")){
+                            text = cData.description
+                        }
+                        val newItem = Item(imageItem(version, cData.image!!.full!!), cData.name!!, text!!, cData.gold!!.total!!, false)
 
-                        itemList.add(newItem)
+                        if(newItem.gold != 0) {
+                            itemList.add(newItem)
+                        }
                     }
+                    itemList.sortBy { it.gold }
                 }
             }
             override fun onFailure(call: Call<ItemList>, t: Throwable) {
@@ -120,43 +132,27 @@ class LeagueViewModel: ViewModel() {
     }
 
 
-    fun imageIcon(name: String): String{ return "https://ddragon.leagueoflegends.com/cdn/11.23.1/img/champion/$name" }
-    fun imageSpell(name: String): String{ return "https://ddragon.leagueoflegends.com/cdn/11.23.1/img/spell/$name" }
-    fun imagePassive(name: String): String{ return "https://ddragon.leagueoflegends.com/cdn/11.23.1/img/passive/$name" }
+    fun imageIcon(version: String, name: String): String{ return "https://ddragon.leagueoflegends.com/cdn/$version/img/champion/$name" }
+    fun imageSpell(version: String, name: String): String{ return "https://ddragon.leagueoflegends.com/cdn/$version/img/spell/$name" }
+    fun imagePassive(version: String, name: String): String{ return "https://ddragon.leagueoflegends.com/cdn/$version/img/passive/$name" }
     fun imageSkin(name: Any, num: Int): String{ return "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${name}_${num}.jpg" }
     fun imageSkinLand(name: Any, num: Int): String{ return "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${name}_${num}.jpg" }
-    fun imageItem(name: String): String{ return "https://ddragon.leagueoflegends.com/cdn/11.23.1/img/item/$name"}
+    fun imageItem(version: String, name: String): String{ return "https://ddragon.leagueoflegends.com/cdn/$version/img/item/$name"}
 
-    fun jsonError(desc: String): String{
-        var dinsError = false
-        val frase = desc.toCharArray()
-        var final = ""
-        for(i in 0..desc.length-1){
-            if(frase[i].equals("<")){
-                dinsError = true
+    fun favChamps(): List<Champion>{
+        var favChamps = mutableListOf<Champion>()
+        for(i in 0..champList.size-1){
+            if(champList.get(i).fav){
+                favChamps.add(champList.get(i))
             }
-            if (!dinsError){
-                final = final.plus(frase[i])
-            }
-            else if(dinsError && frase[i].equals(">")){
-                dinsError = false
-            }
-
         }
-        return final
+        return favChamps
     }
 
     fun getChamps() = champList
     fun getItems() = itemList
 
-    fun getOneList(position: Int) = champList[position]
+    fun getOneChamp(position: Int) = champList[position]
+    fun getOneFavChamp(position: Int) = favChamps()[position]
 
-    fun urlToDrawable(url: String?): Drawable? {
-        return try {
-            val `is`: InputStream = URL(url).getContent() as InputStream
-            Drawable.createFromStream(`is`, "src name")
-        } catch (e: Exception) {
-            null
-        }
-    }
 }

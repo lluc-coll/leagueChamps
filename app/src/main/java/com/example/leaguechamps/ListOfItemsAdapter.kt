@@ -36,7 +36,6 @@ class ListOfItemsAdapter(private val items: List<Item>, private val listener: Li
             itemName = itemView.findViewById(R.id.item_name)
             itemDesc = itemView.findViewById(R.id.item_desc)
             itemGold = itemView.findViewById(R.id.item_gold)
-
         }
 
         fun bindData(item: Item){
@@ -45,6 +44,7 @@ class ListOfItemsAdapter(private val items: List<Item>, private val listener: Li
             itemDesc.text = item.desc
             itemGold.text = item.gold.toString()
         }
-        override fun onClick(v: View?) {}
+        override fun onClick(v: View?) {
+        }
     }
 }

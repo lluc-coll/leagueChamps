@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/item_icon"
-        android:layout_width="70dp"
-        android:layout_height="58dp"
+        android:layout_width="80dp"
+        android:layout_height="68dp"
         android:src="@drawable/base"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,14 +32,14 @@
         app:layout_constraintStart_toEndOf="@+id/item_icon"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <TextView
         android:id="@+id/item_desc"
-        android:layout_width="283dp"
-        android:layout_height="32dp"
+        android:layout_width="273dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="5dp"
         android:fontFamily="@font/lol"
-        android:scrollbars="vertical"
         android:text="asdasda asdasdasda, asdasdasda"
         android:textColor="@color/grey"
         android:textSize="10sp"
@@ -63,7 +63,6 @@
         android:layout_marginStart="2dp"
         android:layout_marginBottom="14dp"
         android:fontFamily="@font/lol"
-        android:scrollbars="vertical"
         android:text="9999"
         android:textColor="@color/gold"
         android:textSize="14sp"

@@ -11,14 +11,14 @@ import retrofit2.http.Path
 
 interface APIService {
 
-    @GET("/cdn/11.23.1/data/en_US/champion.json")
-    fun getChampions(): Call<ChampionListData>?
+    @GET("/cdn/{version}/data/{language}/champion.json")
+    fun getChampions(@Path("version") version: String, @Path("language") language: String): Call<ChampionListData>?
 
-    @GET("/cdn/11.23.1/data/en_US/champion/{championName}.json")
-    fun getChampion(@Path("championName") championName: String): Call<ChampionListData>?
+    @GET("/cdn/{version}/data/{language}/champion/{championName}.json")
+    fun getChampion(@Path("version") version: String, @Path("language") language: String, @Path("championName") championName: String): Call<ChampionListData>?
 
-    @GET("/cdn/11.23.1/data/en_US/item.json")
-    fun getItems(): Call<ItemList>?
+    @GET("/cdn/{version}/data/{language}/item.json")
+    fun getItems(@Path("version") version: String, @Path("language") language: String): Call<ItemList>?
 
 
 

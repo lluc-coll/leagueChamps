@@ -1,8 +1,6 @@
 package com.example.leaguechamps
 
 import android.os.Bundle
-import android.os.Handler
-import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
@@ -25,10 +23,10 @@ class SkinFragment : Fragment(R.layout.skins_fragment){
         viewPage = view.findViewById(R.id.viewPagerSkins)
 
         val position = arguments?.getInt("position")
-        val champ = viewModel.getOneList(position!!)
+        val champ = viewModel.getOneChamp(position!!)
         var extra = ChampExtra("null", "null",null, null)
+        viewModel.favs = false
 
-        Log.d("asdasd", "${viewModel.champExtras}")
 
         for (i in 0..viewModel.champExtras.size-1){
             if(viewModel.champExtras.get(i).champId!!.equals(champ.id)){
@@ -36,20 +34,7 @@ class SkinFragment : Fragment(R.layout.skins_fragment){
             }
         }
 
-        if(extra.champId!!.equals("null")){
-            viewModel.extendedChamp(champ.id.toString(), position)
-            Handler().postDelayed({
-                for (i in 0..viewModel.champExtras.size-1){
-                    if(viewModel.champExtras.get(i).champId!!.equals(champ.id)){
-                        extra = viewModel.champExtras.get(i)
-                    }
-                }
-                viewPage.adapter = SkinsAdapter(context, extra!!.skins)
-            }, 1000)
-        }
-        else{
-            viewPage.adapter = SkinsAdapter(context, extra!!.skins)
-        }
+        viewPage.adapter = SkinsAdapter(context, extra!!.skins)
 
         goBack.setOnClickListener{
             val action = SkinFragmentDirections.actionSkinFragmentToChampionFragment(position)

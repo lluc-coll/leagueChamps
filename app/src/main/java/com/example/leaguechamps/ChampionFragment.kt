@@ -1,6 +1,7 @@
 package com.example.leaguechamps
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -57,7 +58,24 @@ class ChampionFragment: Fragment(R.layout.champion_fragment) {
         spellsButton = view.findViewById(R.id.spells)
 
         val position = arguments?.getInt("position")
-        val champ = viewModel.getOneList(position!!)
+        var champ = viewModel.getOneChamp(position!!)
+        if(viewModel.favs){
+            champ = viewModel.getOneFavChamp(position)
+        }
+        var charged = false
+
+        for (i in 0..viewModel.champExtras.size-1) {
+            if (viewModel.champExtras.get(i).champId!!.equals(champ.id)) {
+                charged = true
+            }
+        }
+
+        if(!charged){
+            viewModel.extendedChamp(champ.id.toString(), position)
+            Handler().postDelayed({
+                champLore.text = champ.lore
+            }, 1500)
+        }
 
         champLore.movementMethod = ScrollingMovementMethod()
 
@@ -87,28 +105,29 @@ class ChampionFragment: Fragment(R.layout.champion_fragment) {
 
 
         goBack.setOnClickListener{
+            viewModel.favs = false
             val action = ChampionFragmentDirections.actionChampionFragmentToListOfChampsFragment()
             findNavController().navigate(action)
         }
 
         favIcon.setOnClickListener{
             if(champ.fav){
-                viewModel.champList.get(position).fav = false
+                viewModel.champList.get(champ.position).fav = false
                 favIcon.setImageResource(R.drawable.fav_false)
             }
             else{
-                viewModel.champList.get(position).fav = true
+                viewModel.champList.get(champ.position).fav = true
                 favIcon.setImageResource(R.drawable.fav_true)
             }
         }
 
         spellsButton.setOnClickListener{
-            val action = ChampionFragmentDirections.actionChampionFragmentToSpellsFragment(position)
+            val action = ChampionFragmentDirections.actionChampionFragmentToSpellsFragment(champ.position)
             findNavController().navigate(action)
         }
 
         skinsButton.setOnClickListener{
-            val action = ChampionFragmentDirections.actionChampionFragmentToSkinFragment(position)
+            val action = ChampionFragmentDirections.actionChampionFragmentToSkinFragment(champ.position)
             findNavController().navigate(action)
         }
     }
