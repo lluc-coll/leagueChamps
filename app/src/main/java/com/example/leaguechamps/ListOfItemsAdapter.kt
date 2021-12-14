@@ -30,12 +30,15 @@ class ListOfItemsAdapter(private val items: List<Item>, private val listener: Li
         private var itemName: TextView
         private var itemDesc: TextView
         private var itemGold: TextView
+        private var itemFav: ImageView
+
 
         init {
             itemIcon = itemView.findViewById(R.id.item_icon)
             itemName = itemView.findViewById(R.id.item_name)
             itemDesc = itemView.findViewById(R.id.item_desc)
             itemGold = itemView.findViewById(R.id.item_gold)
+            itemFav = itemView.findViewById(R.id.favIcon)
         }
 
         fun bindData(item: Item){
@@ -43,6 +46,21 @@ class ListOfItemsAdapter(private val items: List<Item>, private val listener: Li
             itemName.text = item.name
             itemDesc.text = item.desc
             itemGold.text = item.gold.toString()
+
+            if(item.fav){
+                itemFav.setImageResource(R.drawable.fav_true)
+            }
+
+            itemFav.setOnClickListener{
+                if(item.fav){
+                    item.fav = false
+                    itemFav.setImageResource(R.drawable.fav_false)
+                }
+                else{
+                    item.fav = true
+                    itemFav.setImageResource(R.drawable.fav_true)
+                }
+            }
         }
         override fun onClick(v: View?) {
         }

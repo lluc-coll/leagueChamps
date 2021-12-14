@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fons">
+    android:fillViewport="true"
+    android:background="@drawable/fons"
+    >
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
 
     <ImageButton
         android:id="@+id/goBack"
@@ -31,6 +38,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <ImageView
         android:id="@+id/passive"
         android:layout_width="59dp"
@@ -55,8 +63,8 @@
     <TextView
         android:id="@+id/passiveName"
         android:layout_width="335dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
         android:fontFamily="@font/lol_bold"
         android:gravity="center"
         android:textColor="@color/grey"
@@ -70,14 +78,13 @@
     <TextView
         android:id="@+id/passiveDesc"
         android:layout_width="277dp"
-        android:layout_height="64dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/lol"
         android:gravity="center_horizontal"
         android:textColor="@color/grey"
         android:textSize="14dp"
-        android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toEndOf="@+id/passive"
@@ -108,8 +115,8 @@
     <TextView
         android:id="@+id/qSpellName"
         android:layout_width="335dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="22dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="58dp"
         android:fontFamily="@font/lol_bold"
         android:gravity="center"
         android:textColor="@color/grey"
@@ -122,14 +129,13 @@
     <TextView
         android:id="@+id/qSpellDesc"
         android:layout_width="277dp"
-        android:layout_height="64dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/lol"
         android:gravity="center_horizontal"
         android:textColor="@color/grey"
         android:textSize="14dp"
-        android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/qSpell"
         app:layout_constraintTop_toBottomOf="@+id/qSpellName" />
@@ -159,8 +165,8 @@
     <TextView
         android:id="@+id/wSpellName"
         android:layout_width="335dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="22dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="58dp"
         android:fontFamily="@font/lol_bold"
         android:gravity="center"
         android:textColor="@color/grey"
@@ -173,14 +179,13 @@
     <TextView
         android:id="@+id/wSpellDesc"
         android:layout_width="277dp"
-        android:layout_height="64dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/lol"
         android:gravity="center_horizontal"
         android:textColor="@color/grey"
         android:textSize="14dp"
-        android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/wSpell"
         app:layout_constraintTop_toBottomOf="@+id/wSpellName" />
@@ -210,8 +215,8 @@
     <TextView
         android:id="@+id/eSpellName"
         android:layout_width="335dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="22dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="58dp"
         android:fontFamily="@font/lol_bold"
         android:gravity="center"
         android:textColor="@color/grey"
@@ -224,14 +229,13 @@
     <TextView
         android:id="@+id/eSpellDesc"
         android:layout_width="277dp"
-        android:layout_height="64dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/lol"
         android:gravity="center_horizontal"
         android:textColor="@color/grey"
         android:textSize="14dp"
-        android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/eSpell"
         app:layout_constraintTop_toBottomOf="@+id/eSpellName" />
@@ -242,6 +246,8 @@
         android:layout_width="67dp"
         android:layout_height="64dp"
         android:layout_marginStart="22dp"
+        android:layout_marginBottom="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rSpellName" />
 
@@ -261,8 +267,8 @@
     <TextView
         android:id="@+id/rSpellName"
         android:layout_width="335dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="22dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="58dp"
         android:fontFamily="@font/lol_bold"
         android:gravity="center"
         android:textColor="@color/grey"
@@ -275,16 +281,16 @@
     <TextView
         android:id="@+id/rSpellDesc"
         android:layout_width="277dp"
-        android:layout_height="64dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/lol"
         android:gravity="center_horizontal"
         android:textColor="@color/grey"
         android:textSize="14dp"
-        android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/rSpell"
         app:layout_constraintTop_toBottomOf="@+id/rSpellName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

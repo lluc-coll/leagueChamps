@@ -1,6 +1,7 @@
 package com.example.leaguechamps
 
 import android.graphics.drawable.Drawable
+import android.text.Html
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.leaguechamps.dataclass.ChampionListData
@@ -74,12 +75,12 @@ class LeagueViewModel: ViewModel() {
                     for (i in 0..champ.data!!.size-1){
                         val cData = champ.data!![prova[i]]
                         val newSpells = Spells(idChamp, cData!!.name!!,
-                            imagePassive(version, cData.passive!!.image!!.full!!), cData.passive!!.name!!, cData.passive!!.description!!,
-                            imageSpell(version, cData.spells!![0].image!!.full!!), cData.spells!![0].name!!, cData.spells!![0].description!!,
-                            imageSpell(version, cData.spells!![1].image!!.full!!), cData.spells!![1].name!!, cData.spells!![1].description!!,
-                            imageSpell(version, cData.spells!![2].image!!.full!!), cData.spells!![2].name!!, cData.spells!![2].description!!,
-                            imageSpell(version, cData.spells!![3].image!!.full!!), cData.spells!![3].name!!, cData.spells!![3].description!!,
-                        )
+                            imagePassive(version, cData.passive!!.image!!.full!!), cData.passive!!.name!!, parse(cData.passive!!.description!!),
+                            imageSpell(version, cData.spells!![0].image!!.full!!), cData.spells!![0].name!!, parse(cData.spells!![0].description!!),
+                            imageSpell(version, cData.spells!![1].image!!.full!!), cData.spells!![1].name!!, parse(cData.spells!![1].description!!),
+                            imageSpell(version, cData.spells!![2].image!!.full!!), cData.spells!![2].name!!, parse(cData.spells!![2].description!!),
+                            imageSpell(version, cData.spells!![3].image!!.full!!), cData.spells!![3].name!!, parse(cData.spells!![3].description!!))
+
 
 
                         var skins = mutableListOf<Skin>(Skin(imageSkin(cData.id!!, cData.skins!![0].num!!), imageSkinLand(cData.id!!, cData.skins!![0].num!!), cData.name!!))
@@ -112,11 +113,8 @@ class LeagueViewModel: ViewModel() {
                     val prova = item!!.data!!.keys.toTypedArray()
                     for (i in 0..item.data!!.size-1){
                         val cData = item.data!![prova[i]]
-                        var text = cData!!.plaintext
-                        if (cData.plaintext.equals("")){
-                            text = cData.description
-                        }
-                        val newItem = Item(imageItem(version, cData.image!!.full!!), cData.name!!, text!!, cData.gold!!.total!!, false)
+
+                        val newItem = Item(imageItem(version, cData!!.image!!.full!!), cData.name!!, parse(cData.description!!), cData.gold!!.total!!, false)
 
                         if(newItem.gold != 0) {
                             itemList.add(newItem)
@@ -139,6 +137,12 @@ class LeagueViewModel: ViewModel() {
     fun imageSkinLand(name: Any, num: Int): String{ return "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${name}_${num}.jpg" }
     fun imageItem(version: String, name: String): String{ return "https://ddragon.leagueoflegends.com/cdn/$version/img/item/$name"}
 
+    fun parse (HTML: String): String{
+        val decoded: String = Html.fromHtml(HTML, Html.FROM_HTML_MODE_COMPACT).toString()
+        Log.d("meh", "$decoded")
+        return decoded
+    }
+
     fun favChamps(): List<Champion>{
         var favChamps = mutableListOf<Champion>()
         for(i in 0..champList.size-1){
@@ -147,6 +151,16 @@ class LeagueViewModel: ViewModel() {
             }
         }
         return favChamps
+    }
+
+    fun favItems(): List<Item>{
+        var favItems = mutableListOf<Item>()
+        for(i in 0..itemList.size-1){
+            if(itemList.get(i).fav){
+                favItems.add(itemList.get(i))
+            }
+        }
+        return favItems
     }
 
     fun getChamps() = champList

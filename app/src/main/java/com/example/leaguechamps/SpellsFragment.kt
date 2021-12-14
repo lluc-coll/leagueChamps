@@ -61,11 +61,7 @@ class SpellsFragment: Fragment(R.layout.spells_fragment)  {
         val champ = viewModel.getOneChamp(position!!)
         viewModel.favs = false
 
-        PDesc.movementMethod = ScrollingMovementMethod()
-        QDesc.movementMethod = ScrollingMovementMethod()
-        WDesc.movementMethod = ScrollingMovementMethod()
-        EDesc.movementMethod = ScrollingMovementMethod()
-        RDesc.movementMethod = ScrollingMovementMethod()
+
 
 
         var extra = ChampExtra("null", "null", null, null)
@@ -77,7 +73,7 @@ class SpellsFragment: Fragment(R.layout.spells_fragment)  {
         }
 
 
-        title.text = extra.name.plus("Spells")
+        title.text = extra.name.plus(" Spells")
         Picasso.get().load(extra.spells!!.PIcon).into(PIcon);
         PName.text = extra.spells!!.PName
         PDesc.text = extra.spells!!.PDesc

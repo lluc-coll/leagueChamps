@@ -1,5 +1,6 @@
 package com.example.leaguechamps
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -18,6 +19,8 @@ class ListOfChampsFragment : Fragment(R.layout.list_of_champs_fragment), ListOfC
     lateinit var itemButton: ImageButton
     private  lateinit var recyclerView: RecyclerView
     private val viewModel: LeagueViewModel by activityViewModels()
+    var numChamps = 5
+    var numItems = 1
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,9 +31,23 @@ class ListOfChampsFragment : Fragment(R.layout.list_of_champs_fragment), ListOfC
         champButton = view.findViewById(R.id.champ_button)
         itemButton = view.findViewById(R.id.item_button)
         recyclerView = view.findViewById(R.id.recycler_view)
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), 5)
+
+        val orientation = resources.configuration.orientation
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            numChamps = 8
+            numItems = 2
+        }else{
+            numChamps = 5
+            numItems = 1
+        }
+
+
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), numChamps)
         val champAdapter = ListOfChampsAdapter(viewModel.getChamps(), this)
+        var favChamps = ListOfChampsAdapter(viewModel.favChamps(), this)
         val itemAdapter = ListOfItemsAdapter(viewModel.getItems(), this)
+        var favItems = ListOfItemsAdapter(viewModel.favItems(), this)
+
         if (viewModel.ft){
             viewModel.ft = false
         Handler().postDelayed({
@@ -42,25 +59,56 @@ class ListOfChampsFragment : Fragment(R.layout.list_of_champs_fragment), ListOfC
 
 
         champButton.setOnClickListener{
+            if (viewModel.favs){
+                recyclerView.layoutManager = GridLayoutManager(requireContext(), numChamps)
+                recyclerView.adapter = favChamps
+            }
+            else{
+                recyclerView.layoutManager = GridLayoutManager(requireContext(), numChamps)
+                recyclerView.adapter = champAdapter
+            }
             champButton.setImageResource(R.drawable.champ_text_high)
             itemButton.setImageResource(R.drawable.item_text)
-            recyclerView.layoutManager = GridLayoutManager(requireContext(), 5)
-            recyclerView.adapter = champAdapter
-            viewModel.favs = false
         }
 
         itemButton.setOnClickListener{
+            if (viewModel.favs){
+                recyclerView.layoutManager = GridLayoutManager(requireContext(), numItems)
+                recyclerView.adapter = favItems
+            }
+            else{
+                recyclerView.layoutManager = GridLayoutManager(requireContext(), numItems)
+                recyclerView.adapter = itemAdapter
+            }
             champButton.setImageResource(R.drawable.champ_text)
             itemButton.setImageResource(R.drawable.item_text_high)
-            recyclerView.layoutManager = GridLayoutManager(requireContext(), 1)
-            recyclerView.adapter = itemAdapter
-            viewModel.favs = false
         }
 
+
         favIcon.setOnClickListener{
-            if(recyclerView.adapter!!.equals(champAdapter)){
-                recyclerView.adapter = ListOfChampsAdapter(viewModel.favChamps(), this)
+            if(viewModel.favs){
+                viewModel.favs = false
+                if(recyclerView.adapter!!.equals(favChamps)){
+                    recyclerView.layoutManager = GridLayoutManager(requireContext(), numChamps)
+                    recyclerView.adapter = champAdapter
+                }
+                else if (recyclerView.adapter!!.equals(favItems)){
+                    recyclerView.layoutManager = GridLayoutManager(requireContext(), numItems)
+                    recyclerView.adapter = itemAdapter
+                }
+            }
+            else{
                 viewModel.favs = true
+                favChamps = ListOfChampsAdapter(viewModel.favChamps(), this)
+                favItems = ListOfItemsAdapter(viewModel.favItems(), this)
+                if (recyclerView.adapter!!.equals(champAdapter)) {
+                    recyclerView.layoutManager = GridLayoutManager(requireContext(), numChamps)
+                    recyclerView.adapter = ListOfChampsAdapter(viewModel.favChamps(), this)
+                } else {
+                    recyclerView.layoutManager = GridLayoutManager(requireContext(), numItems)
+                    recyclerView.adapter = ListOfItemsAdapter(viewModel.favItems(), this)
+                }
+
             }
         }
     }
