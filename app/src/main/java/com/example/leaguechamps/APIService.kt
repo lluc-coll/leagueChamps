@@ -20,6 +20,12 @@ interface APIService {
     @GET("/cdn/{version}/data/{language}/item.json")
     fun getItems(@Path("version") version: String, @Path("language") language: String): Call<ItemList>?
 
+    @GET("/cdn/languages.json")
+    fun getLanguages(): Call<List<String>>
+
+    @GET("/api/versions.json")
+    fun getVersions(): Call<List<String>>
+
 
 
     companion object {

@@ -58,6 +58,11 @@ class ListOfChampsFragment : Fragment(R.layout.list_of_champs_fragment), ListOfC
         }
 
 
+        config.setOnClickListener{
+            val action = ListOfChampsFragmentDirections.actionListOfChampsFragmentToConfigFragment()
+            findNavController().navigate(action)
+        }
+
         champButton.setOnClickListener{
             if (viewModel.favs){
                 recyclerView.layoutManager = GridLayoutManager(requireContext(), numChamps)
@@ -103,10 +108,10 @@ class ListOfChampsFragment : Fragment(R.layout.list_of_champs_fragment), ListOfC
                 favItems = ListOfItemsAdapter(viewModel.favItems(), this)
                 if (recyclerView.adapter!!.equals(champAdapter)) {
                     recyclerView.layoutManager = GridLayoutManager(requireContext(), numChamps)
-                    recyclerView.adapter = ListOfChampsAdapter(viewModel.favChamps(), this)
+                    recyclerView.adapter = favChamps
                 } else {
                     recyclerView.layoutManager = GridLayoutManager(requireContext(), numItems)
-                    recyclerView.adapter = ListOfItemsAdapter(viewModel.favItems(), this)
+                    recyclerView.adapter = favItems
                 }
 
             }

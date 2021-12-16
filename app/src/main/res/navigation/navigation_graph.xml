@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_listOfChampsFragment_to_championFragment"
             app:destination="@id/championFragment" />
+        <action
+            android:id="@+id/action_listOfChampsFragment_to_configFragment"
+            app:destination="@id/configFragment" />
     </fragment>
     <fragment
         android:id="@+id/championFragment"
@@ -51,5 +54,13 @@
         <argument
             android:name="position"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/configFragment"
+        android:name="com.example.leaguechamps.ConfigFragment"
+        android:label="ConfigFragment" >
+        <action
+            android:id="@+id/action_configFragment_to_listOfChampsFragment"
+            app:destination="@id/listOfChampsFragment" />
     </fragment>
 </navigation>

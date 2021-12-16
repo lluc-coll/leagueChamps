@@ -23,6 +23,7 @@ class LeagueViewModel: ViewModel() {
     var language = "en_US"
     var favs = false
 
+
     //var newOrOld = false
 
     init {
@@ -34,24 +35,41 @@ class LeagueViewModel: ViewModel() {
     }
 
 
-    fun loadChamps(){
+    fun loadChamps() {
+        champList.removeAll(champList)
         val requestCall = APIService.create()
         val call = requestCall.getChampions(version, language)
 
         call!!.enqueue(object : Callback<ChampionListData> {
-            override fun onResponse(call: Call<ChampionListData>, response: Response<ChampionListData>) {
-                if (response.isSuccessful){
+            override fun onResponse(
+                call: Call<ChampionListData>,
+                response: Response<ChampionListData>
+            ) {
+                if (response.isSuccessful) {
                     val champ = response.body()
                     val prova = champ!!.data!!.keys.toTypedArray()
-                    for (i in 0..champ.data!!.size-1){
+                    for (i in 0..champ.data!!.size - 1) {
                         val cData = champ.data!![prova[i]]
-                        val newChamp = Champion(i, cData!!.id!!, cData.name!!, cData.title!!, imageIcon(version, cData.image!!.full!!), cData.blurb!!,
-                            cData.tags!!, cData.info!!.attack!!, cData.info!!.defense!!, cData.info!!.magic!!, cData.info!!.difficulty!!, false)
+                        val newChamp = Champion(
+                            i,
+                            cData!!.id!!,
+                            cData.name!!,
+                            cData.title!!,
+                            imageIcon(version, cData.image!!.full!!),
+                            cData.blurb!!,
+                            cData.tags!!,
+                            cData.info!!.attack!!,
+                            cData.info!!.defense!!,
+                            cData.info!!.magic!!,
+                            cData.info!!.difficulty!!,
+                            false
+                        )
 
                         champList.add(newChamp)
                     }
                 }
             }
+
             override fun onFailure(call: Call<ChampionListData>, t: Throwable) {
                 TODO("Not yet implemented")
             }
@@ -59,35 +77,59 @@ class LeagueViewModel: ViewModel() {
     }
 
 
-    fun extendedChamp(idChamp: String, position: Int){
+    fun extendedChamp(idChamp: String, position: Int) {
+        champExtras.removeAll(champExtras)
         val requestCall = APIService.create()
         val call = requestCall.getChampion(version, language, idChamp)
 
         call!!.enqueue(object : Callback<ChampionListData> {
-            override fun onResponse(call: Call<ChampionListData>, response: Response<ChampionListData>) {
-                if (response.isSuccessful){
+            override fun onResponse(
+                call: Call<ChampionListData>,
+                response: Response<ChampionListData>
+            ) {
+                if (response.isSuccessful) {
                     val champ = response.body()
                     val prova = champ!!.data!!.keys.toTypedArray()
 
                     champList.get(position).lore = champ.data!![prova[0]]!!.lore!!
 
 
-                    for (i in 0..champ.data!!.size-1){
+                    for (i in 0..champ.data!!.size - 1) {
                         val cData = champ.data!![prova[i]]
-                        val newSpells = Spells(idChamp, cData!!.name!!,
-                            imagePassive(version, cData.passive!!.image!!.full!!), cData.passive!!.name!!, parse(cData.passive!!.description!!),
-                            imageSpell(version, cData.spells!![0].image!!.full!!), cData.spells!![0].name!!, parse(cData.spells!![0].description!!),
-                            imageSpell(version, cData.spells!![1].image!!.full!!), cData.spells!![1].name!!, parse(cData.spells!![1].description!!),
-                            imageSpell(version, cData.spells!![2].image!!.full!!), cData.spells!![2].name!!, parse(cData.spells!![2].description!!),
-                            imageSpell(version, cData.spells!![3].image!!.full!!), cData.spells!![3].name!!, parse(cData.spells!![3].description!!))
+                        val newSpells = Spells(
+                            idChamp,
+                            cData!!.name!!,
+                            imagePassive(version, cData.passive!!.image!!.full!!),
+                            cData.passive!!.name!!,
+                            parse(cData.passive!!.description!!),
+                            imageSpell(version, cData.spells!![0].image!!.full!!),
+                            cData.spells!![0].name!!,
+                            parse(cData.spells!![0].description!!),
+                            imageSpell(version, cData.spells!![1].image!!.full!!),
+                            cData.spells!![1].name!!,
+                            parse(cData.spells!![1].description!!),
+                            imageSpell(version, cData.spells!![2].image!!.full!!),
+                            cData.spells!![2].name!!,
+                            parse(cData.spells!![2].description!!),
+                            imageSpell(version, cData.spells!![3].image!!.full!!),
+                            cData.spells!![3].name!!,
+                            parse(cData.spells!![3].description!!)
+                        )
 
 
-
-                        var skins = mutableListOf<Skin>(Skin(imageSkin(cData.id!!, cData.skins!![0].num!!), imageSkinLand(cData.id!!, cData.skins!![0].num!!), cData.name!!))
-                        for (i in 1..cData.skins!!.size-1){
-                            val newSkin = Skin(imageSkin(cData.id!!, cData.skins!![i].num!!),
+                        var skins = mutableListOf<Skin>(
+                            Skin(
+                                imageSkin(cData.id!!, cData.skins!![0].num!!),
+                                imageSkinLand(cData.id!!, cData.skins!![0].num!!),
+                                cData.name!!
+                            )
+                        )
+                        for (i in 1..cData.skins!!.size - 1) {
+                            val newSkin = Skin(
+                                imageSkin(cData.id!!, cData.skins!![i].num!!),
                                 imageSkinLand(cData.id!!, cData.skins!![i].num!!),
-                                cData.skins!![i].name!!)
+                                cData.skins!![i].name!!
+                            )
                             skins.add(newSkin)
 
                         }
@@ -96,37 +138,73 @@ class LeagueViewModel: ViewModel() {
                     }
                 }
             }
+
             override fun onFailure(call: Call<ChampionListData>, t: Throwable) {
                 TODO("Not yet implemented")
             }
         })
     }
 
-    fun loadItems(){
+    fun loadItems() {
+        itemList.removeAll(itemList)
         val requestCall = APIService.create()
         val call = requestCall.getItems(version, language)
 
         call!!.enqueue(object : Callback<ItemList> {
             override fun onResponse(call: Call<ItemList>, response: Response<ItemList>) {
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     val item = response.body()
                     val prova = item!!.data!!.keys.toTypedArray()
-                    for (i in 0..item.data!!.size-1){
+                    for (i in 0..item.data!!.size - 1) {
                         val cData = item.data!![prova[i]]
 
-                        val newItem = Item(imageItem(version, cData!!.image!!.full!!), cData.name!!, parse(cData.description!!), cData.gold!!.total!!, false)
+                        val newItem = Item(
+                            imageItem(version, cData!!.image!!.full!!),
+                            cData.name!!,
+                            parse(cData.description!!),
+                            cData.gold!!.total!!,
+                            false
+                        )
 
-                        if(newItem.gold != 0) {
+                        if (newItem.gold != 0) {
                             itemList.add(newItem)
                         }
                     }
                     itemList.sortBy { it.gold }
                 }
             }
+
             override fun onFailure(call: Call<ItemList>, t: Throwable) {
                 TODO("Not yet implemented")
             }
         })
+    }
+
+    fun loadLanguages(): ArrayList<String> {
+        var languages = arrayListOf<String>()
+        val requestCall = APIService.create()
+        val call = requestCall.getLanguages()
+
+        call!!.enqueue(object : Callback<List<String>> {
+            override fun onResponse(call: Call<List<String>>, response: Response<List<String>>) {
+                if (response.isSuccessful) {
+                    val langs = response.body()
+                    for (i in 0 .. langs!!.size-1) {
+                        languages.add(langs.get(i))
+                    }
+                    Log.d("meh", "$languages")
+                }
+            }
+
+            override fun onFailure(call: Call<List<String>>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
+        return languages
+    }
+
+    fun loadVersions(): ArrayList<String>{
+        return arrayListOf("11.24.1", "11.23.1")
     }
 
 
