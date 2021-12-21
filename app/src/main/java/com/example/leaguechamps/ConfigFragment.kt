@@ -1,6 +1,8 @@
 package com.example.leaguechamps
 
 import android.os.Bundle
+import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.fragment.app.Fragment
@@ -24,27 +26,20 @@ class ConfigFragment: Fragment(R.layout.config)  {
         versions = view.findViewById(R.id.versions)
         done = view.findViewById(R.id.done)
 
+        val lastlang = viewModel.language
+        val lastver = viewModel.version
 
-        val adapterL = ArrayAdapter(context!!, android.R.layout.simple_spinner_item, viewModel.loadLanguages())
+        val lang = viewModel.loadLanguages()
+        val vers = viewModel.loadVersions()
+
+        val adapterL = ArrayAdapter(context!!, android.R.layout.simple_spinner_item, lang)
         adapterL.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         languages.setAdapter(adapterL)
-        languages.prompt = viewModel.language.toString()
 
-        languages.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(parent:AdapterView<*>, view: View, position: Int, id: Long){
-                viewModel.language = parent.getItemAtPosition(position).toString()
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>){
-
-            }
-        }
-
-
-        versions.prompt = viewModel.version.toString()
-        val adapterV = ArrayAdapter(context!!, android.R.layout.simple_spinner_item, viewModel.loadVersions())
+        val adapterV = ArrayAdapter(context!!, android.R.layout.simple_spinner_item, vers)
         adapterV.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         versions.setAdapter(adapterV)
+
 
         goBack.setOnClickListener{
             val action = ConfigFragmentDirections.actionConfigFragmentToListOfChampsFragment()
@@ -52,11 +47,17 @@ class ConfigFragment: Fragment(R.layout.config)  {
         }
 
         done.setOnClickListener{
-            viewModel.language = "es_ES"
-            viewModel.version = versions.selectedItem.toString()
-            viewModel.ft = true
-            viewModel.loadChamps()
-            viewModel.loadItems()
+            if(languages.selectedItem != null) {
+                viewModel.language = languages.selectedItem.toString()
+            }
+            if (versions.selectedItem != null) {
+                viewModel.version = versions.selectedItem.toString()
+            }
+            if(lastlang != viewModel.language || lastver != viewModel.version) {
+                viewModel.ft = true
+                viewModel.loadChamps()
+                viewModel.loadItems()
+            }
             val action = ConfigFragmentDirections.actionConfigFragmentToListOfChampsFragment()
             findNavController().navigate(action)
         }

@@ -1,5 +1,6 @@
 package com.example.leaguechamps
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
@@ -34,7 +35,13 @@ class SkinFragment : Fragment(R.layout.skins_fragment){
             }
         }
 
-        viewPage.adapter = SkinsAdapter(context, extra!!.skins)
+        val orientation = resources.configuration.orientation
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            viewPage.adapter = SkinsAdapter(context, extra!!.skins, true)
+        }
+        else{
+            viewPage.adapter = SkinsAdapter(context, extra!!.skins, false)
+        }
 
         goBack.setOnClickListener{
             val action = SkinFragmentDirections.actionSkinFragmentToChampionFragment(position)

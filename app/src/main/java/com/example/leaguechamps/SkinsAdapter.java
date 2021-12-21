@@ -28,11 +28,14 @@ class SkinsAdapter extends PagerAdapter {
     // Layout Inflater
     LayoutInflater mLayoutInflater;
 
+    Boolean landscape;
+
 
     // Viewpager Constructor
-    public SkinsAdapter(Context context, List<Skin> skins) {
+    public SkinsAdapter(Context context, List<Skin> skins, Boolean landscape) {
         this.context = context;
         this.skins = skins;
+        this.landscape = landscape;
         mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -55,7 +58,11 @@ class SkinsAdapter extends PagerAdapter {
         ImageView skinImage = (ImageView) itemView.findViewById(R.id.skin);
         TextView skinText = (TextView) itemView.findViewById(R.id.skin_name);
 
-        Picasso.get().load(skins.get(position).getPhoto()).into(skinImage);
+        if(landscape){
+            Picasso.get().load(skins.get(position).getLandphoto()).into(skinImage);
+        }else {
+            Picasso.get().load(skins.get(position).getPhoto()).into(skinImage);
+        }
         skinText.setText(skins.get(position).getName());
 
         Objects.requireNonNull(container).addView(itemView);

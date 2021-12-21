@@ -1,6 +1,7 @@
 package com.example.leaguechamps
 
 import android.graphics.drawable.Drawable
+import android.os.Handler
 import android.text.Html
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -23,8 +24,6 @@ class LeagueViewModel: ViewModel() {
     var language = "en_US"
     var favs = false
 
-
-    //var newOrOld = false
 
     init {
         //val champ = Champion("base", "Base", "the Base Champion", "https://gitlab.com/lluc.coll.7e4/leaguechamps/-/blob/master/app/src/main/res/drawable-v24/base.png   ", "Lore of the Champion, in this case: Donec molestie velit eu diam vestibulum accumsan. Ut vel eleifend ante. Aliquam imperdiet dolor lorem, et dignissim elit vehicula vel. Donec cursus ex tincidunt rutrum pellentesque. Cras sed ligula placerat, faucibus sapien quis, ultrices lacus. Donec vitae laoreet ante. Curabitur tempor libero in metus porttitor facilisis. Nunc tempor sit amet mi vitae mattis. Donec mattis varius interdum. In non volutpat enim. Sed sed lacinia sem. Donec pretium ligula nec eros feugiat luctus. Duis iaculis dignissim nisl a finibus.", listOf("Tank", "Mage"), Random.nextInt(10), Random.nextInt(10), Random.nextInt(10), Random.nextInt(10), Random.nextBoolean(), null, null)
@@ -181,7 +180,7 @@ class LeagueViewModel: ViewModel() {
     }
 
     fun loadLanguages(): ArrayList<String> {
-        var languages = arrayListOf<String>()
+        var languages = arrayListOf("")
         val requestCall = APIService.create()
         val call = requestCall.getLanguages()
 
@@ -189,10 +188,10 @@ class LeagueViewModel: ViewModel() {
             override fun onResponse(call: Call<List<String>>, response: Response<List<String>>) {
                 if (response.isSuccessful) {
                     val langs = response.body()
-                    for (i in 0 .. langs!!.size-1) {
-                        languages.add(langs.get(i))
+                    languages[0] = langs!![0]
+                    for (i in 1 .. langs!!.size-1) {
+                        languages.add(langs[i])
                     }
-                    Log.d("meh", "$languages")
                 }
             }
 
@@ -204,7 +203,26 @@ class LeagueViewModel: ViewModel() {
     }
 
     fun loadVersions(): ArrayList<String>{
-        return arrayListOf("11.24.1", "11.23.1")
+        var versions = arrayListOf("")
+        val requestCall = APIService.create()
+        val call = requestCall.getVersions()
+
+        call!!.enqueue(object : Callback<List<String>> {
+            override fun onResponse(call: Call<List<String>>, response: Response<List<String>>) {
+                if (response.isSuccessful) {
+                    val langs = response.body()
+                    versions[0] = langs!![0]
+                    for (i in 1 .. langs.size-1) {
+                        versions.add(langs[i])
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<List<String>>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
+        return versions
     }
 
 
@@ -217,7 +235,6 @@ class LeagueViewModel: ViewModel() {
 
     fun parse (HTML: String): String{
         val decoded: String = Html.fromHtml(HTML, Html.FROM_HTML_MODE_COMPACT).toString()
-        Log.d("meh", "$decoded")
         return decoded
     }
 
