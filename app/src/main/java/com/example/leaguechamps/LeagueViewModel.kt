@@ -20,9 +20,10 @@ class LeagueViewModel: ViewModel() {
     var champExtras = mutableListOf<ChampExtra>()
     var itemList = mutableListOf<Item>()
     var ft = true
-    var version = "11.24.1"
+    var version = "12.2.1"
     var language = "en_US"
     var favs = false
+    var searching = false
 
 
     init {
@@ -256,6 +257,30 @@ class LeagueViewModel: ViewModel() {
             }
         }
         return favItems
+    }
+
+    fun searchChamps(search: String): List<Champion>{
+        var searchChamps = mutableListOf<Champion>()
+
+        for (i in champList){
+            if(i.name.contains(search, ignoreCase = true)){
+                searchChamps.add(i)
+            }
+        }
+
+        return searchChamps
+    }
+
+    fun searchItems(search: String): List<Item>{
+        var searchItems = mutableListOf<Item>()
+
+        for (i in itemList){
+            if(i.name.contains(search, ignoreCase = true)){
+                searchItems.add(i)
+            }
+        }
+
+        return searchItems
     }
 
     fun getChamps() = champList

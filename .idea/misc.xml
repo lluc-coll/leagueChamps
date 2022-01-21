@@ -16,7 +16,9 @@
         <entry key="app/src/main/res/drawable/fav_icon.xml" value="0.22083333333333333" />
         <entry key="app/src/main/res/drawable/fav_true.xml" value="0.22083333333333333" />
         <entry key="app/src/main/res/drawable/goback.xml" value="0.22083333333333333" />
+        <entry key="app/src/main/res/drawable/rounded.xml" value="0.325" />
         <entry key="app/src/main/res/drawable/search.xml" value="0.22083333333333333" />
+        <entry key="app/src/main/res/drawable/sort.xml" value="0.22083333333333333" />
         <entry key="app/src/main/res/drawable/splash_background.xml" value="0.22083333333333333" />
         <entry key="app/src/main/res/layout-land/champion_fragment.xml" value="0.33" />
         <entry key="app/src/main/res/layout-land/config.xml" value="0.33" />
@@ -25,6 +27,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/champion_fragment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/config.xml" value="0.2046875" />
+        <entry key="app/src/main/res/layout/custom_search.xml" value="0.25" />
         <entry key="app/src/main/res/layout/list_champ.xml" value="0.29257246376811596" />
         <entry key="app/src/main/res/layout/list_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/list_of_champs_fragment.xml" value="0.36614583333333334" />

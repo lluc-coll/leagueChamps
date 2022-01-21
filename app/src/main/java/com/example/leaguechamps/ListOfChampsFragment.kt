@@ -10,10 +10,13 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.textfield.TextInputLayout
 
 class ListOfChampsFragment : Fragment(R.layout.list_of_champs_fragment), ListOfChampsAdapter.OnItemClickListener{
     lateinit var config: ImageButton
     lateinit var search: ImageButton
+    lateinit var sort: ImageButton
+    lateinit var searchBar: TextInputLayout
     lateinit var favIcon: ImageButton
     lateinit var champButton: ImageButton
     lateinit var itemButton: ImageButton
@@ -27,6 +30,8 @@ class ListOfChampsFragment : Fragment(R.layout.list_of_champs_fragment), ListOfC
 
         config = view.findViewById(R.id.config)
         search = view.findViewById(R.id.search)
+        sort = view.findViewById(R.id.sort)
+        searchBar = view.findViewById(R.id.searchInputLayout)
         favIcon = view.findViewById(R.id.favIcon)
         champButton = view.findViewById(R.id.champ_button)
         itemButton = view.findViewById(R.id.item_button)
@@ -45,8 +50,10 @@ class ListOfChampsFragment : Fragment(R.layout.list_of_champs_fragment), ListOfC
         recyclerView.layoutManager = GridLayoutManager(requireContext(), numChamps)
         val champAdapter = ListOfChampsAdapter(viewModel.getChamps(), this)
         var favChamps = ListOfChampsAdapter(viewModel.favChamps(), this)
+        var searchChamps = ListOfChampsAdapter(viewModel.searchChamps(""), this)
         val itemAdapter = ListOfItemsAdapter(viewModel.getItems(), this)
         var favItems = ListOfItemsAdapter(viewModel.favItems(), this)
+        var searchItems = ListOfItemsAdapter(viewModel.searchItems(""), this)
 
         if (viewModel.ft){
             viewModel.ft = false
@@ -112,6 +119,33 @@ class ListOfChampsFragment : Fragment(R.layout.list_of_champs_fragment), ListOfC
                 } else {
                     recyclerView.layoutManager = GridLayoutManager(requireContext(), numItems)
                     recyclerView.adapter = favItems
+                }
+            }
+        }
+
+        search.setOnClickListener{
+            if(viewModel.searching){
+                viewModel.searching = false
+                if(recyclerView.adapter!!.equals(searchChamps)){
+                    recyclerView.layoutManager = GridLayoutManager(requireContext(), numChamps)
+                    recyclerView.adapter = champAdapter
+                }
+                else if (recyclerView.adapter!!.equals(searchItems)){
+                    recyclerView.layoutManager = GridLayoutManager(requireContext(), numItems)
+                    recyclerView.adapter = itemAdapter
+                }
+            }
+            else{
+                viewModel.favs = true
+                var searchString = searchBar.editText?.text.toString()
+                searchChamps = ListOfChampsAdapter(viewModel.favChamps(searchString), this)
+                searchItems = ListOfItemsAdapter(viewModel.favItems(), this)
+                if (recyclerView.adapter!!.equals(champAdapter)) {
+                    recyclerView.layoutManager = GridLayoutManager(requireContext(), numChamps)
+                    recyclerView.adapter = searchChamps
+                } else {
+                    recyclerView.layoutManager = GridLayoutManager(requireContext(), numItems)
+                    recyclerView.adapter = searchItems
                 }
 
             }

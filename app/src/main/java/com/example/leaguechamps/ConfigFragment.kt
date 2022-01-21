@@ -55,6 +55,7 @@ class ConfigFragment: Fragment(R.layout.config)  {
             }
             if(lastlang != viewModel.language || lastver != viewModel.version) {
                 viewModel.ft = true
+                viewModel.champExtras.removeAll(viewModel.champExtras)
                 viewModel.loadChamps()
                 viewModel.loadItems()
             }
