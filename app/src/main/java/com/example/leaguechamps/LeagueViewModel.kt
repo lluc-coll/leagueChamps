@@ -24,6 +24,7 @@ class LeagueViewModel: ViewModel() {
     var language = "en_US"
     var favs = false
     var searching = false
+    var toSearch = ""
 
 
     init {

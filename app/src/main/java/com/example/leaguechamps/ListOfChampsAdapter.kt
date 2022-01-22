@@ -44,7 +44,7 @@ class ListOfChampsAdapter(private val champs: List<Champion>, private val listen
         override fun onClick(v: View?) {
             val position = adapterPosition
             if (position != RecyclerView.NO_POSITION) {
-                listener.onItemClick(position)
+                listener.onItemClick(champs[position].position)
             }
         }
     }

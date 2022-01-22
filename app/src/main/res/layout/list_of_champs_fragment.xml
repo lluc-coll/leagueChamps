@@ -15,32 +15,20 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="-16dp" />
 
-    <com.google.android.material.textfield.TextInputLayout
+    <EditText
         android:id="@+id/searchInputLayout"
-        android:layout_width="200sp"
-        android:layout_height="30sp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:hint="search"
-        android:textColorHint="@color/base"
-        app:boxBackgroundColor="@color/grey"
-        app:boxCornerRadiusBottomEnd="8dp"
-        app:boxCornerRadiusBottomStart="8dp"
-        app:boxCornerRadiusTopEnd="8dp"
-        app:boxCornerRadiusTopStart="8dp"
-        app:boxStrokeColor="@color/base"
-        app:layout_constraintEnd_toStartOf="@+id/search"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        android:visibility="invisible">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/searchInputLayoutText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/lol"
-            android:textColor="@color/base"
-            android:textSize="10sp" />
-    </com.google.android.material.textfield.TextInputLayout>
+        android:layout_width="199dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/gold"
+        android:fontFamily="@font/lol"
+        android:hint="Search"
+        android:textColor="@color/gold"
+        android:textColorHint="@color/gold"
+        android:textSize="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <ImageButton
         android:id="@+id/champ_button"
@@ -111,16 +99,16 @@
         android:id="@+id/search"
         android:layout_width="42dp"
         android:layout_height="34dp"
-        android:layout_marginTop="16dp"
 
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:background="@android:color/transparent"
         android:src="@drawable/search"
-        app:layout_constraintEnd_toStartOf="@+id/sort"
-        app:layout_constraintTop_toBottomOf="@+id/favIcon" />
+        app:layout_constraintStart_toEndOf="@+id/searchInputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <TextView
-        android:id="@+id/imageView"
+        android:id="@+id/title"
         android:layout_width="258dp"
         android:layout_height="33dp"
         android:layout_marginTop="16dp"

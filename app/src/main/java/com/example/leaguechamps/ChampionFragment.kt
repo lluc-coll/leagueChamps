@@ -59,9 +59,7 @@ class ChampionFragment: Fragment(R.layout.champion_fragment) {
 
         val position = arguments?.getInt("position")
         var champ = viewModel.getOneChamp(position!!)
-        if(viewModel.favs){
-            champ = viewModel.getOneFavChamp(position)
-        }
+
         var charged = false
 
         for (i in 0..viewModel.champExtras.size-1) {

@@ -16,6 +16,33 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <ImageButton
+        android:id="@+id/sort"
+        android:layout_width="42dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="16dp"
+
+        android:layout_marginEnd="16dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/sort"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/favIcon" />
+
+    <EditText
+        android:id="@+id/searchInputLayout"
+        android:layout_width="199dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/gold"
+        android:fontFamily="@font/lol"
+        android:hint="Search"
+        android:textColor="@color/gold"
+        android:textColorHint="@color/gold"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toStartOf="@+id/search"
+        app:layout_constraintStart_toEndOf="@+id/title"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
         android:id="@+id/champ_button"
         android:layout_width="117dp"
         android:layout_height="27dp"
@@ -81,7 +108,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/imageView"
+        android:id="@+id/title"
         android:layout_width="258dp"
         android:layout_height="33dp"
         android:layout_marginTop="16dp"
