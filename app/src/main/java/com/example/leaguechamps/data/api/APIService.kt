@@ -12,19 +12,19 @@ import retrofit2.http.Path
 interface APIService {
 
     @GET("/cdn/{version}/data/{language}/champion.json")
-    fun getChampions(@Path("version") version: String, @Path("language") language: String): Call<ChampionListData>?
+    suspend fun getChampions(@Path("version") version: String, @Path("language") language: String): Call<ChampionListData>?
 
     @GET("/cdn/{version}/data/{language}/champion/{championName}.json")
-    fun getChampion(@Path("version") version: String, @Path("language") language: String, @Path("championName") championName: String): Call<ChampionListData>?
+     fun getChampion(@Path("version") version: String, @Path("language") language: String, @Path("championName") championName: String): Call<ChampionListData>?
 
     @GET("/cdn/{version}/data/{language}/item.json")
-    fun getItems(@Path("version") version: String, @Path("language") language: String): Call<ItemList>?
+     fun getItems(@Path("version") version: String, @Path("language") language: String): Call<ItemList>?
 
     @GET("/cdn/languages.json")
-    fun getLanguages(): Call<List<String>>
+     fun getLanguages(): Call<List<String>>
 
     @GET("/api/versions.json")
-    fun getVersions(): Call<List<String>>
+     fun getVersions(): Call<List<String>>
 
 
 

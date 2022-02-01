@@ -18,7 +18,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 import java.util.Objects;
 
-class SkinsAdapter extends PagerAdapter {
+public class SkinsAdapter extends PagerAdapter {
 
     // Context object
     Context context;

@@ -1,11 +1,18 @@
 package com.example.leaguechamps.ui.viewModel
 
 import android.text.Html
+import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.leaguechamps.data.api.APIService
 import com.example.leaguechamps.data.dataclass.ChampionListData
 import com.example.leaguechamps.data.dataclass.ItemList
+import com.example.leaguechamps.data.repository.Repository
 import com.example.leaguechamps.ui.models.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -13,8 +20,11 @@ import retrofit2.Response
 
 class LeagueViewModel: ViewModel() {
     var champList = mutableListOf<Champion>()
+    var mutableChampList = MutableLiveData<List<Champion>>()
     var champExtras = mutableListOf<ChampExtra>()
+    var mutableChampExtras = MutableLiveData<List<ChampExtra>>()
     var itemList = mutableListOf<Item>()
+    var mutableItemList = MutableLiveData<List<Item>>()
     var ft = true
     var version = "12.2.1"
     var language = "en_US"
@@ -28,13 +38,21 @@ class LeagueViewModel: ViewModel() {
         //champList.add(champ)
 
         loadChamps()
-        loadItems()
+        //loadItems()
     }
 
 
     fun loadChamps() {
         champList.removeAll(champList)
-        val requestCall = APIService.create()
+
+        viewModelScope.launch {
+            val response = withContext(Dispatchers.IO) {
+                Repository().getChamps(version, language)
+            }
+            Log.d("meh", "$response")
+        }
+
+        /*val requestCall = APIService.create()
         val call = requestCall.getChampions(version, language)
 
         call!!.enqueue(object : Callback<ChampionListData> {
@@ -70,7 +88,7 @@ class LeagueViewModel: ViewModel() {
             override fun onFailure(call: Call<ChampionListData>, t: Throwable) {
                 TODO("Not yet implemented")
             }
-        })
+        })*/
     }
 
 
