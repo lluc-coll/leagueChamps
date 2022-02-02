@@ -6,8 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.leaguechamps.data.api.APIService
-import com.example.leaguechamps.data.dataclass.ChampionListData
-import com.example.leaguechamps.data.dataclass.ItemList
 import com.example.leaguechamps.data.repository.Repository
 import com.example.leaguechamps.ui.models.*
 import kotlinx.coroutines.Dispatchers
@@ -25,8 +23,11 @@ class LeagueViewModel: ViewModel() {
     var mutableChampExtras = MutableLiveData<List<ChampExtra>>()
     var itemList = mutableListOf<Item>()
     var mutableItemList = MutableLiveData<List<Item>>()
-    var ft = true
-    var version = "12.2.1"
+    var versionList = arrayListOf("")
+    var mutableVersionList = MutableLiveData<List<String>>()
+    var languageList = arrayListOf("")
+    var mutableLanguageList = MutableLiveData<List<String>>()
+    var version = "12.3.1"
     var language = "en_US"
     var favs = false
     var searching = false
@@ -34,211 +35,166 @@ class LeagueViewModel: ViewModel() {
 
 
     init {
-        //val champ = Champion("base", "Base", "the Base Champion", "https://gitlab.com/lluc.coll.7e4/leaguechamps/-/blob/master/app/src/main/res/drawable-v24/base.png   ", "Lore of the Champion, in this case: Donec molestie velit eu diam vestibulum accumsan. Ut vel eleifend ante. Aliquam imperdiet dolor lorem, et dignissim elit vehicula vel. Donec cursus ex tincidunt rutrum pellentesque. Cras sed ligula placerat, faucibus sapien quis, ultrices lacus. Donec vitae laoreet ante. Curabitur tempor libero in metus porttitor facilisis. Nunc tempor sit amet mi vitae mattis. Donec mattis varius interdum. In non volutpat enim. Sed sed lacinia sem. Donec pretium ligula nec eros feugiat luctus. Duis iaculis dignissim nisl a finibus.", listOf("Tank", "Mage"), Random.nextInt(10), Random.nextInt(10), Random.nextInt(10), Random.nextInt(10), Random.nextBoolean(), null, null)
-        //champList.add(champ)
-
+        loadVersions()
+        loadLanguages()
         loadChamps()
-        //loadItems()
+        loadItems()
     }
 
 
     fun loadChamps() {
         champList.removeAll(champList)
 
+        //mutableVersionList.observe(viewLifecycleOwner, {
         viewModelScope.launch {
-            val response = withContext(Dispatchers.IO) {
-                Repository().getChamps(version, language)
-            }
-            Log.d("meh", "$response")
-        }
+            val response = withContext(Dispatchers.IO) { Repository().getChamps(version, language) }
 
-        /*val requestCall = APIService.create()
-        val call = requestCall.getChampions(version, language)
+            if (response.isSuccessful){
+                val champ = response.body()
+                val prova = champ!!.data!!.keys.toTypedArray()
+                for (i in 0..champ.data!!.size - 1) {
+                    val cData = champ.data!![prova[i]]
+                    val newChamp = Champion(
+                        i,
+                        cData!!.id!!,
+                        cData.name!!,
+                        cData.title!!,
+                        imageIcon(version, cData.image!!.full!!),
+                        cData.blurb!!,
+                        cData.tags!!,
+                        cData.info!!.attack!!,
+                        cData.info!!.defense!!,
+                        cData.info!!.magic!!,
+                        cData.info!!.difficulty!!,
+                        false
+                    )
 
-        call!!.enqueue(object : Callback<ChampionListData> {
-            override fun onResponse(
-                call: Call<ChampionListData>,
-                response: Response<ChampionListData>
-            ) {
-                if (response.isSuccessful) {
-                    val champ = response.body()
-                    val prova = champ!!.data!!.keys.toTypedArray()
-                    for (i in 0..champ.data!!.size - 1) {
-                        val cData = champ.data!![prova[i]]
-                        val newChamp = Champion(
-                            i,
-                            cData!!.id!!,
-                            cData.name!!,
-                            cData.title!!,
-                            imageIcon(version, cData.image!!.full!!),
-                            cData.blurb!!,
-                            cData.tags!!,
-                            cData.info!!.attack!!,
-                            cData.info!!.defense!!,
-                            cData.info!!.magic!!,
-                            cData.info!!.difficulty!!,
-                            false
-                        )
-
-                        champList.add(newChamp)
-                    }
+                    champList.add(newChamp)
                 }
             }
 
-            override fun onFailure(call: Call<ChampionListData>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
-        })*/
+            mutableChampList.postValue(champList)
+        }
     }
 
 
     fun extendedChamp(idChamp: String, position: Int) {
         champExtras.removeAll(champExtras)
-        val requestCall = APIService.create()
-        val call = requestCall.getChampion(version, language, idChamp)
 
-        call!!.enqueue(object : Callback<ChampionListData> {
-            override fun onResponse(
-                call: Call<ChampionListData>,
-                response: Response<ChampionListData>
-            ) {
-                if (response.isSuccessful) {
-                    val champ = response.body()
-                    val prova = champ!!.data!!.keys.toTypedArray()
+        viewModelScope.launch {
+            val response = withContext(Dispatchers.IO) { Repository().getChamp(version, language, idChamp) }
 
-                    champList.get(position).lore = champ.data!![prova[0]]!!.lore!!
+            if (response.isSuccessful) {
+                val champ = response.body()
+                val prova = champ!!.data!!.keys.toTypedArray()
+
+                champList.get(position).lore = champ.data!![prova[0]]!!.lore!!
+                mutableChampList.postValue(champList)
 
 
-                    for (i in 0..champ.data!!.size - 1) {
-                        val cData = champ.data!![prova[i]]
-                        val newSpells = Spells(
-                            idChamp,
-                            cData!!.name!!,
-                            imagePassive(version, cData.passive!!.image!!.full!!),
-                            cData.passive!!.name!!,
-                            parse(cData.passive!!.description!!),
-                            imageSpell(version, cData.spells!![0].image!!.full!!),
-                            cData.spells!![0].name!!,
-                            parse(cData.spells!![0].description!!),
-                            imageSpell(version, cData.spells!![1].image!!.full!!),
-                            cData.spells!![1].name!!,
-                            parse(cData.spells!![1].description!!),
-                            imageSpell(version, cData.spells!![2].image!!.full!!),
-                            cData.spells!![2].name!!,
-                            parse(cData.spells!![2].description!!),
-                            imageSpell(version, cData.spells!![3].image!!.full!!),
-                            cData.spells!![3].name!!,
-                            parse(cData.spells!![3].description!!)
+                for (i in 0..champ.data!!.size - 1) {
+                    val cData = champ.data!![prova[i]]
+                    val newSpells = Spells(
+                        idChamp,
+                        cData!!.name!!,
+                        imagePassive(version, cData.passive!!.image!!.full!!),
+                        cData.passive!!.name!!,
+                        parse(cData.passive!!.description!!),
+                        imageSpell(version, cData.spells!![0].image!!.full!!),
+                        cData.spells!![0].name!!,
+                        parse(cData.spells!![0].description!!),
+                        imageSpell(version, cData.spells!![1].image!!.full!!),
+                        cData.spells!![1].name!!,
+                        parse(cData.spells!![1].description!!),
+                        imageSpell(version, cData.spells!![2].image!!.full!!),
+                        cData.spells!![2].name!!,
+                        parse(cData.spells!![2].description!!),
+                        imageSpell(version, cData.spells!![3].image!!.full!!),
+                        cData.spells!![3].name!!,
+                        parse(cData.spells!![3].description!!)
+                    )
+
+
+                    var skins = mutableListOf<Skin>(
+                        Skin(
+                            imageSkin(cData.id!!, cData.skins!![0].num!!),
+                            imageSkinLand(cData.id!!, cData.skins!![0].num!!),
+                            cData.name!!
                         )
-
-
-                        var skins = mutableListOf<Skin>(
-                            Skin(
-                                imageSkin(cData.id!!, cData.skins!![0].num!!),
-                                imageSkinLand(cData.id!!, cData.skins!![0].num!!),
-                                cData.name!!
-                            )
+                    )
+                    for (i in 1..cData.skins!!.size - 1) {
+                        val newSkin = Skin(
+                            imageSkin(cData.id!!, cData.skins!![i].num!!),
+                            imageSkinLand(cData.id!!, cData.skins!![i].num!!),
+                            cData.skins!![i].name!!
                         )
-                        for (i in 1..cData.skins!!.size - 1) {
-                            val newSkin = Skin(
-                                imageSkin(cData.id!!, cData.skins!![i].num!!),
-                                imageSkinLand(cData.id!!, cData.skins!![i].num!!),
-                                cData.skins!![i].name!!
-                            )
-                            skins.add(newSkin)
+                        skins.add(newSkin)
 
-                        }
-
-                        champExtras.add(ChampExtra(cData.id!!, cData.name, newSpells, skins))
                     }
+
+                    champExtras.add(ChampExtra(cData.id!!, cData.name, newSpells, skins))
                 }
             }
-
-            override fun onFailure(call: Call<ChampionListData>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
-        })
+        }
+        mutableChampExtras.postValue(champExtras)
     }
 
     fun loadItems() {
         itemList.removeAll(itemList)
-        val requestCall = APIService.create()
-        val call = requestCall.getItems(version, language)
 
-        call!!.enqueue(object : Callback<ItemList> {
-            override fun onResponse(call: Call<ItemList>, response: Response<ItemList>) {
-                if (response.isSuccessful) {
-                    val item = response.body()
-                    val prova = item!!.data!!.keys.toTypedArray()
-                    for (i in 0..item.data!!.size - 1) {
-                        val cData = item.data!![prova[i]]
+        viewModelScope.launch {
+            val response = withContext(Dispatchers.IO) { Repository().getItems(version, language) }
+            if (response.isSuccessful) {
+                val item = response.body()
+                val prova = item!!.data!!.keys.toTypedArray()
+                for (i in 0..item.data!!.size - 1) {
+                    val cData = item.data!![prova[i]]
 
-                        val newItem = Item(
-                            imageItem(version, cData!!.image!!.full!!),
-                            cData.name!!,
-                            parse(cData.description!!),
-                            cData.gold!!.total!!,
-                            false
-                        )
+                    val newItem = Item(
+                        imageItem(version, cData!!.image!!.full!!),
+                        cData.name!!,
+                        parse(cData.description!!),
+                        cData.gold!!.total!!,
+                        false
+                    )
 
-                        if (newItem.gold != 0) {
-                            itemList.add(newItem)
-                        }
+                    if (newItem.gold != 0) {
+                        itemList.add(newItem)
                     }
-                    itemList.sortBy { it.gold }
                 }
+                itemList.sortBy { it.gold }
             }
-
-            override fun onFailure(call: Call<ItemList>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
-        })
+            mutableItemList.postValue(itemList)
+        }
     }
 
-    fun loadLanguages(): ArrayList<String> {
-        var languages = arrayListOf("")
-        val requestCall = APIService.create()
-        val call = requestCall.getLanguages()
-
-        call!!.enqueue(object : Callback<List<String>> {
-            override fun onResponse(call: Call<List<String>>, response: Response<List<String>>) {
-                if (response.isSuccessful) {
-                    val langs = response.body()
-                    languages[0] = langs!![0]
-                    for (i in 1 .. langs!!.size-1) {
-                        languages.add(langs[i])
-                    }
+    fun loadLanguages(){
+        viewModelScope.launch {
+            val response = withContext(Dispatchers.IO) { Repository().getLanguages() }
+            if (response.isSuccessful) {
+                val langs = response.body()!!
+                languageList[0] = langs!![0]
+                for (i in 1 .. langs.size-1) {
+                    languageList.add(langs[i])
                 }
             }
-
-            override fun onFailure(call: Call<List<String>>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
-        })
-        return languages
+            mutableLanguageList.postValue(languageList)
+        }
     }
 
-    fun loadVersions(): ArrayList<String>{
-        var versions = arrayListOf("")
-        val requestCall = APIService.create()
-        val call = requestCall.getVersions()
-
-        call!!.enqueue(object : Callback<List<String>> {
-            override fun onResponse(call: Call<List<String>>, response: Response<List<String>>) {
-                if (response.isSuccessful) {
-                    val langs = response.body()
-                    versions[0] = langs!![0]
-                    for (i in 1 .. langs.size-1) {
-                        versions.add(langs[i])
-                    }
+    fun loadVersions(){
+        viewModelScope.launch {
+            val response = withContext(Dispatchers.IO) { Repository().getVersions() }
+            if (response.isSuccessful) {
+                val langs = response.body()!!
+                versionList[0] = langs!![0]
+                for (i in 1 .. langs.size-1) {
+                    versionList.add(langs!![i])
                 }
             }
+            mutableVersionList.postValue(versionList)
 
-            override fun onFailure(call: Call<List<String>>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
-        })
-        return versions
+        }
     }
 
 

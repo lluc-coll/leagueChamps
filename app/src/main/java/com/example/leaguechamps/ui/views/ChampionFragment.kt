@@ -1,5 +1,6 @@
 package com.example.leaguechamps.ui.views
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -94,13 +95,17 @@ class ChampionFragment: Fragment(R.layout.champion_fragment) {
             val tag1 = "".plus("https://raw.communitydragon.org/10.1/plugins/rcp-fe-lol-hover-card/global/default/roleicon-").plus(champ.tags!!.get(1).lowercase()).plus(".png")
             Picasso.get().load(tag1).into(champTag2);
         }
-        attackBar.progress = champ.attack!!
+        attackBar.setProgress(champ.attack!!*10)
+        progressBarAnimator(attackBar)
         attackValue.text = "".plus(champ.attack).plus("/10")
-        defenceBar.progress = champ.defence!!
+        defenceBar.setProgress(champ.defence!!*10)
+        progressBarAnimator(defenceBar)
         defenceValue.text = "".plus(champ.defence).plus("/10")
-        magicBar.progress = champ.magic!!
+        magicBar.setProgress(champ.magic!!*10)
+        progressBarAnimator(magicBar)
         magicValue.text = "".plus(champ.magic).plus("/10")
-        difficultyBar.progress = champ.difficulty!!
+        difficultyBar.setProgress(champ.difficulty!!*10)
+        progressBarAnimator(difficultyBar)
         difficultyValue.text = "".plus(champ.difficulty).plus("/10")
 
 
@@ -131,4 +136,11 @@ class ChampionFragment: Fragment(R.layout.champion_fragment) {
             findNavController().navigate(action)
         }
     }
+
+    fun progressBarAnimator(pb: ProgressBar) {
+        ObjectAnimator.ofInt(pb, "progress", 0, pb.progress)
+            .setDuration(1000)
+            .start()
+    }
+
 }

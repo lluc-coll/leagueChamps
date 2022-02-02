@@ -29,8 +29,8 @@ class ConfigFragment: Fragment(R.layout.config)  {
         val lastlang = viewModel.language
         val lastver = viewModel.version
 
-        val lang = viewModel.loadLanguages()
-        val vers = viewModel.loadVersions()
+        val lang = viewModel.languageList
+        val vers = viewModel.versionList
 
         val adapterL = ArrayAdapter(context!!, android.R.layout.simple_spinner_item, lang)
         adapterL.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -54,7 +54,6 @@ class ConfigFragment: Fragment(R.layout.config)  {
                 viewModel.version = versions.selectedItem.toString()
             }
             if(lastlang != viewModel.language || lastver != viewModel.version) {
-                viewModel.ft = true
                 viewModel.champExtras.removeAll(viewModel.champExtras)
                 viewModel.loadChamps()
                 viewModel.loadItems()

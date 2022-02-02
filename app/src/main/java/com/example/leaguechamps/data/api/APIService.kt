@@ -3,6 +3,7 @@ package com.example.leaguechamps.data.api
 import com.example.leaguechamps.data.dataclass.ChampionListData
 import com.example.leaguechamps.data.dataclass.ItemList
 import okhttp3.OkHttpClient
+import retrofit2.Response
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -12,19 +13,20 @@ import retrofit2.http.Path
 interface APIService {
 
     @GET("/cdn/{version}/data/{language}/champion.json")
-    suspend fun getChampions(@Path("version") version: String, @Path("language") language: String): Call<ChampionListData>?
+    suspend fun getChampions(@Path("version") version: String, @Path("language") language: String): Response<ChampionListData>
 
     @GET("/cdn/{version}/data/{language}/champion/{championName}.json")
-     fun getChampion(@Path("version") version: String, @Path("language") language: String, @Path("championName") championName: String): Call<ChampionListData>?
+    suspend fun getChampion(@Path("version") version: String, @Path("language") language: String, @Path("championName") championName: String): Response<ChampionListData>
 
     @GET("/cdn/{version}/data/{language}/item.json")
-     fun getItems(@Path("version") version: String, @Path("language") language: String): Call<ItemList>?
+    suspend fun getItems(@Path("version") version: String, @Path("language") language: String): Response<ItemList>
 
     @GET("/cdn/languages.json")
-     fun getLanguages(): Call<List<String>>
+    suspend fun getLanguages(): Response<List<String>>
 
     @GET("/api/versions.json")
-     fun getVersions(): Call<List<String>>
+
+    suspend fun getVersions(): Response<List<String>>
 
 
 

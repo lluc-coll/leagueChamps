@@ -19,25 +19,25 @@
         android:id="@+id/searchInputLayout"
         android:layout_width="199dp"
         android:layout_height="35dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
         android:backgroundTint="@color/gold"
         android:fontFamily="@font/lol"
         android:hint="Search"
         android:textColor="@color/gold"
         android:textColorHint="@color/gold"
         android:textSize="15dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/search"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <ImageButton
         android:id="@+id/champ_button"
         android:layout_width="117dp"
         android:layout_height="27dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
         android:scaleX="1.3"
         android:scaleY="1.3"
-        android:background="@android:color/transparent"
         android:src="@drawable/champ_text_high"
         app:layout_constraintEnd_toStartOf="@+id/item_button"
         app:layout_constraintHorizontal_bias="0.5"
@@ -49,10 +49,10 @@
         android:id="@+id/item_button"
         android:layout_width="117dp"
         android:layout_height="27dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
         android:scaleX="1.3"
         android:scaleY="1.3"
-        android:layout_marginTop="4dp"
-        android:background="@android:color/transparent"
         android:src="@drawable/item_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -84,27 +84,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/sort"
-        android:layout_width="42dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="16dp"
-
-        android:layout_marginEnd="16dp"
-        android:background="@android:color/transparent"
-        android:src="@drawable/sort"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/favIcon" />
-
-    <ImageButton
         android:id="@+id/search"
         android:layout_width="42dp"
         android:layout_height="34dp"
 
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@android:color/transparent"
         android:src="@drawable/search"
-        app:layout_constraintStart_toEndOf="@+id/searchInputLayout"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <TextView

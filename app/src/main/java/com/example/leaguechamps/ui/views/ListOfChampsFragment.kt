@@ -2,7 +2,6 @@ package com.example.leaguechamps.ui.views
 
 import android.content.res.Configuration
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.EditText
@@ -22,7 +21,6 @@ class ListOfChampsFragment : Fragment(R.layout.list_of_champs_fragment), ListOfC
     lateinit var title: TextView
     lateinit var config: ImageButton
     lateinit var search: ImageButton
-    lateinit var sort: ImageButton
     lateinit var searchBar: EditText
     lateinit var favIcon: ImageButton
     lateinit var champButton: ImageButton
@@ -38,7 +36,6 @@ class ListOfChampsFragment : Fragment(R.layout.list_of_champs_fragment), ListOfC
         title = view.findViewById(R.id.title)
         config = view.findViewById(R.id.config)
         search = view.findViewById(R.id.search)
-        sort = view.findViewById(R.id.sort)
         searchBar = view.findViewById(R.id.searchInputLayout)
         favIcon = view.findViewById(R.id.favIcon)
         champButton = view.findViewById(R.id.champ_button)
@@ -63,24 +60,25 @@ class ListOfChampsFragment : Fragment(R.layout.list_of_champs_fragment), ListOfC
         var favItems = ListOfItemsAdapter(viewModel.favItems(), this)
         var searchItems = ListOfItemsAdapter(viewModel.searchItems(""), this)
 
-        if (viewModel.ft) {
+        /*if (viewModel.ft) {
             viewModel.ft = false
             Handler().postDelayed({
                 recyclerView.adapter = champAdapter
             }, 1000)
-        }
-        else if (viewModel.favs) {
+        }*/
+
+        if (viewModel.favs) {
             recyclerView.layoutManager = GridLayoutManager(requireContext(), numChamps)
-            recyclerView.adapter = favChamps
+            viewModel.mutableChampList.observe(viewLifecycleOwner, {recyclerView.adapter = favChamps})
         }
         else if(viewModel.searching){
             searchChamps = ListOfChampsAdapter(viewModel.searchChamps(viewModel.toSearch), this)
             recyclerView.layoutManager = GridLayoutManager(requireContext(), numChamps)
-            recyclerView.adapter = searchChamps
+            viewModel.mutableChampList.observe(viewLifecycleOwner, {recyclerView.adapter = searchChamps})
         }
         else {
             recyclerView.layoutManager = GridLayoutManager(requireContext(), numChamps)
-            recyclerView.adapter = champAdapter
+            viewModel.mutableChampList.observe(viewLifecycleOwner, {recyclerView.adapter = champAdapter})
         }
 
         title.setOnClickListener {
