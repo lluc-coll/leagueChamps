@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import android.text.method.ScrollingMovementMethod
+import android.transition.TransitionInflater
 import android.widget.ImageButton
 import androidx.navigation.fragment.findNavController
 import com.example.leaguechamps.R
@@ -40,6 +41,9 @@ class ChampionFragment: Fragment(R.layout.champion_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val inflater = TransitionInflater.from(requireContext())
+        exitTransition = inflater.inflateTransition(R.transition.slide_left)
+        enterTransition = inflater.inflateTransition(R.transition.slide_right)
 
         goBack = view.findViewById(R.id.goBack)
         favIcon = view.findViewById(R.id.favIcon)
