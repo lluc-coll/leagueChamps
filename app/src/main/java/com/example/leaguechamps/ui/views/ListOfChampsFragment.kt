@@ -157,7 +157,6 @@ class ListOfChampsFragment : Fragment(R.layout.list_of_champs_fragment), ListOfC
         search.setOnClickListener {
             viewModel.searching = true
             viewModel.toSearch = searchBar.text.toString()
-            Log.d("meh", viewModel.toSearch)
             if (recyclerView.adapter!!.equals(champAdapter) || recyclerView.adapter!!.equals(favChamps) || recyclerView.adapter!!.equals(searchChamps)
             ) {
                 searchChamps = ListOfChampsAdapter(viewModel.searchChamps(viewModel.toSearch), this)

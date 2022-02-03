@@ -1,19 +1,17 @@
 package com.example.leaguechamps.ui.viewModel
 
 import android.text.Html
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.leaguechamps.data.api.APIService
 import com.example.leaguechamps.data.repository.Repository
+import com.example.leaguechamps.database.FavApplication
+import com.example.leaguechamps.database.entities.FavEntity
 import com.example.leaguechamps.ui.models.*
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class LeagueViewModel: ViewModel() {
@@ -27,7 +25,7 @@ class LeagueViewModel: ViewModel() {
     var mutableVersionList = MutableLiveData<List<String>>()
     var languageList = arrayListOf("")
     var mutableLanguageList = MutableLiveData<List<String>>()
-    var version = "12.3.1"
+    var version = "12.1.1"
     var language = "en_US"
     var favs = false
     var searching = false
@@ -37,8 +35,7 @@ class LeagueViewModel: ViewModel() {
     init {
         loadVersions()
         loadLanguages()
-        loadChamps()
-        loadItems()
+
     }
 
 
@@ -74,6 +71,7 @@ class LeagueViewModel: ViewModel() {
             }
 
             mutableChampList.postValue(champList)
+            getFavs()
         }
     }
 
@@ -165,6 +163,7 @@ class LeagueViewModel: ViewModel() {
                 itemList.sortBy { it.gold }
             }
             mutableItemList.postValue(itemList)
+            getFavs()
         }
     }
 
@@ -193,7 +192,9 @@ class LeagueViewModel: ViewModel() {
                 }
             }
             mutableVersionList.postValue(versionList)
-
+            version = versionList[0]
+            loadChamps()
+            loadItems()
         }
     }
 
@@ -208,6 +209,45 @@ class LeagueViewModel: ViewModel() {
     fun parse (HTML: String): String{
         val decoded: String = Html.fromHtml(HTML, Html.FROM_HTML_MODE_COMPACT).toString()
         return decoded
+    }
+
+    fun getFavs(){
+        CoroutineScope(Dispatchers.Main).launch {
+            withContext(Dispatchers.IO) {
+                var favs = FavApplication.database.FavDao().getAllFavs()
+                for (i in favs) {
+                    if (i.champ == 0) {
+                        for (j in champList) {
+                            if (j.id == i.id) {
+                                j.fav = true
+                            }
+                        }
+                    } else if (i.champ == 1) {
+                        for (j in itemList) {
+                            if (j.name == i.id) {
+                                j.fav = true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    fun addFav(fav: FavEntity){
+        CoroutineScope(Dispatchers.Main).launch {
+            withContext(Dispatchers.IO) {
+                FavApplication.database.FavDao().addFav(fav)
+            }
+        }
+    }
+
+    fun delFav(fav: FavEntity){
+        CoroutineScope(Dispatchers.Main).launch {
+            withContext(Dispatchers.IO) {
+                FavApplication.database.FavDao().deleteFav(fav)
+            }
+        }
     }
 
     fun favChamps(): List<Champion>{

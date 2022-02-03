@@ -8,7 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.leaguechamps.ui.models.Item
 import com.example.leaguechamps.R
+import com.example.leaguechamps.database.entities.FavEntity
 import com.squareup.picasso.Picasso
+import com.example.leaguechamps.ui.viewModel.LeagueViewModel
 
 class ListOfItemsAdapter(private val items: List<Item>, private val listener: ListOfChampsAdapter.OnItemClickListener) : RecyclerView.Adapter<ListOfItemsAdapter.ListOfItemsViewHolder>() {
 
@@ -34,6 +36,7 @@ class ListOfItemsAdapter(private val items: List<Item>, private val listener: Li
         private var itemFav: ImageView
 
 
+
         init {
             itemIcon = itemView.findViewById(R.id.item_icon)
             itemName = itemView.findViewById(R.id.item_name)
@@ -47,6 +50,7 @@ class ListOfItemsAdapter(private val items: List<Item>, private val listener: Li
             itemName.text = item.name
             itemDesc.text = item.desc
             itemGold.text = item.gold.toString()
+            val viewModel = LeagueViewModel()
 
             if(item.fav){
                 itemFav.setImageResource(R.drawable.fav_true)
@@ -56,10 +60,12 @@ class ListOfItemsAdapter(private val items: List<Item>, private val listener: Li
                 if(item.fav){
                     item.fav = false
                     itemFav.setImageResource(R.drawable.fav_false)
+                    viewModel.delFav(FavEntity(item.name, 1))
                 }
                 else{
                     item.fav = true
                     itemFav.setImageResource(R.drawable.fav_true)
+                    viewModel.addFav(FavEntity(item.name, 1))
                 }
             }
         }

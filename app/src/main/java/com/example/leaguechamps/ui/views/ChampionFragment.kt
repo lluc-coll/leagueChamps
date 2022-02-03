@@ -14,6 +14,7 @@ import android.transition.TransitionInflater
 import android.widget.ImageButton
 import androidx.navigation.fragment.findNavController
 import com.example.leaguechamps.R
+import com.example.leaguechamps.database.entities.FavEntity
 import com.example.leaguechamps.ui.viewModel.LeagueViewModel
 import com.squareup.picasso.Picasso
 
@@ -123,10 +124,12 @@ class ChampionFragment: Fragment(R.layout.champion_fragment) {
             if(champ.fav){
                 viewModel.champList.get(champ.position).fav = false
                 favIcon.setImageResource(R.drawable.fav_false)
+                viewModel.delFav(FavEntity(champ.id.toString(), 0))
             }
             else{
                 viewModel.champList.get(champ.position).fav = true
                 favIcon.setImageResource(R.drawable.fav_true)
+                viewModel.addFav(FavEntity(champ.id.toString(), 0))
             }
         }
 
