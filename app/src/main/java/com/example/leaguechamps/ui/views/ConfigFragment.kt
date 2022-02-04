@@ -1,6 +1,7 @@
 package com.example.leaguechamps.ui.views
 
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.View
 import android.widget.*
 import androidx.fragment.app.Fragment
@@ -20,6 +21,9 @@ class ConfigFragment: Fragment(R.layout.config)  {
     private val viewModel: LeagueViewModel by activityViewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val inflater = TransitionInflater.from(requireContext())
+        exitTransition = inflater.inflateTransition(R.transition.slide_left)
+        enterTransition = inflater.inflateTransition(R.transition.slide_right)
 
         goBack = view.findViewById(R.id.goBack)
         languages = view.findViewById(R.id.language)

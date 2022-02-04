@@ -82,6 +82,7 @@ class ListOfChampsFragment : Fragment(R.layout.list_of_champs_fragment), ListOfC
         }
 
         title.setOnClickListener {
+            viewModel.favs = false
             viewModel.searching = false
             recyclerView.layoutManager = GridLayoutManager(requireContext(), numChamps)
             recyclerView.adapter = champAdapter
@@ -130,6 +131,7 @@ class ListOfChampsFragment : Fragment(R.layout.list_of_champs_fragment), ListOfC
 
 
         favIcon.setOnClickListener {
+            viewModel.favs = false
             viewModel.searching = false
             if (viewModel.favs) {
                 viewModel.favs = false
