@@ -8,7 +8,8 @@ It provides customizable options for **language and version**, a favorites syste
 ## 🚀 Features
 
 - Fetches **champions** and **items** from Riot’s API.  
-- Supports **multiple languages** and **game versions**.  
+- Supports **multiple languages** and **game versions**.
+- always uses the **latest data** from the API
 - Favorites system for quick access to preferred champions and items.  
 - Detailed **champion pages** with:
   - Lore
